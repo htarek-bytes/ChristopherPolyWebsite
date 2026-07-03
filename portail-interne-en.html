@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wholesale Portal — Christophe Poly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --yellow: #F4C100;
+    --yellow-deep: #D9A800;
+    --charcoal: #2A2A28;
+    --charcoal-soft: #45433F;
+    --paper: #FAF7F1;
+    --paper-dark: #F0EBE0;
+    --line: rgba(42,42,40,0.12);
+    --ink-soft: rgba(42,42,40,0.62);
+    --radius: 2px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--paper); color:var(--charcoal);
+    line-height:1.5; -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 40px;}
+
+  /* Portal header — visually distinct from public site, signals "you're inside" */
+  .portal-header{
+    background:var(--charcoal); color:var(--paper);
+    padding:22px 0;
+  }
+  .portal-header .wrap{display:flex; align-items:center; justify-content:space-between;}
+  .ph-logo{font-family:'Fraunces',serif; font-size:1.2rem; font-weight:500;}
+  .ph-badge{
+    display:flex; align-items:center; gap:8px;
+    font-size:0.74rem; font-weight:500; color:rgba(250,247,241,0.55);
+  }
+  .ph-badge .dot{width:6px; height:6px; border-radius:50%; background:var(--yellow);}
+  .ph-actions{display:flex; align-items:center; gap:22px;}
+  .ph-actions a{font-size:0.82rem; color:rgba(250,247,241,0.7);}
+  .ph-actions a:hover{color:var(--paper);}
+
+  .portal-intro{padding:56px 0 40px; border-bottom:1px solid var(--line);}
+  .portal-intro h1{
+    font-family:'Fraunces',serif; font-weight:500;
+    font-size:clamp(1.7rem, 2.6vw, 2.2rem); margin-bottom:12px;
+  }
+  .portal-intro p{color:var(--ink-soft); font-size:0.96rem; max-width:560px;}
+
+  .portal-grid{padding:56px 0 100px;}
+  .pg-label{
+    font-size:0.72rem; font-weight:600; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--ink-soft);
+    margin-bottom:24px; display:block;
+  }
+  .cards{
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:18px;
+    margin-bottom:54px;
+  }
+  .pcard{
+    background:var(--paper); border:1px solid var(--line);
+    border-radius:var(--radius); padding:28px 24px;
+    display:flex; flex-direction:column; gap:16px;
+    transition:border-color 0.2s ease, transform 0.2s ease;
+  }
+  .pcard:hover{border-color:var(--charcoal); transform:translateY(-2px);}
+  .pcard .ic{
+    width:40px; height:40px; border-radius:50%;
+    background:var(--paper-dark); display:flex; align-items:center; justify-content:center;
+  }
+  .pcard .ic svg{width:19px; height:19px; stroke:var(--charcoal);}
+  .pcard h3{font-size:0.98rem; font-weight:500;}
+  .pcard p{font-size:0.84rem; color:var(--ink-soft); flex:1;}
+  .pcard .action{
+    font-size:0.78rem; font-weight:600;
+    display:flex; align-items:center; gap:6px;
+    padding-top:14px; border-top:1px solid var(--line);
+  }
+  .pcard .action svg{width:13px; height:13px;}
+  .pcard.featured{background:var(--charcoal); border-color:var(--charcoal); color:var(--paper);}
+  .pcard.featured .ic{background:rgba(250,247,241,0.1);}
+  .pcard.featured .ic svg{stroke:var(--yellow);}
+  .pcard.featured p{color:rgba(250,247,241,0.6);}
+  .pcard.featured .action{color:var(--yellow); border-top-color:rgba(250,247,241,0.15);}
+
+  /* Marketplace row — visually separated since these are external links */
+  .marketplace{
+    display:grid; grid-template-columns:1fr 1fr; gap:18px;
+  }
+  .mcard{
+    background:var(--paper-dark); border-radius:var(--radius);
+    padding:30px 28px; display:flex; align-items:center; justify-content:space-between;
+    gap:20px;
+  }
+  .mcard .info h3{font-size:1rem; font-weight:500; margin-bottom:5px;}
+  .mcard .info p{font-size:0.82rem; color:var(--ink-soft);}
+  .mcard .go{
+    flex-shrink:0; background:var(--charcoal); color:var(--paper);
+    padding:11px 20px; font-size:0.8rem; font-weight:500;
+    border-radius:var(--radius); white-space:nowrap;
+  }
+  .mcard .go:hover{background:var(--charcoal-soft);}
+
+  footer{padding:40px 0; border-top:1px solid var(--line); text-align:center;}
+  footer p{font-size:0.78rem; color:var(--ink-soft);}
+
+  @media (max-width:980px){
+    .wrap{padding-left:24px; padding-right:24px;}
+    .cards{grid-template-columns:1fr 1fr;}
+    .marketplace{grid-template-columns:1fr;}
+    .portal-header .wrap{flex-wrap:wrap; gap:14px;}
+  }
+  @media (max-width:560px){
+    .cards{grid-template-columns:1fr;}
+    .mcard{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<div class="portal-header">
+  <div class="wrap">
+    <a href="index-en.html" class="ph-logo">Christophe Poly</a>
+    <div class="ph-badge"><span class="dot"></span>Wholesale Access — active session</div>
+    <div class="ph-actions">
+      <a href="portail-interne.html">FR</a>
+      <a href="mailto:info@christophepoly.com">Contact the studio</a>
+      <a href="espace-commercant-en.html">Exit portal</a>
+    </div>
+  </div>
+</div>
+
+<section class="portal-intro">
+  <div class="wrap">
+    <h1>Welcome to wholesale access.</h1>
+    <p>Catalog, forms and ordering tools — everything you need to present and sell the Christophe Poly collection in your boutique.</p>
+  </div>
+</section>
+
+<section class="portal-grid">
+  <div class="wrap">
+    <span class="pg-label">Documents &amp; resources</span>
+    <div class="cards">
+
+      <a href="#" class="pcard featured">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 4h16v16H4z"/><path d="M4 9h16"/><path d="M9 4v16"/></svg></div>
+        <h3>Full Catalog</h3>
+        <p>The complete collection lineup with wholesale pricing. Updated every season.</p>
+        <span class="action">Download PDF <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></span>
+      </a>
+
+      <a href="#" class="pcard">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M9 11l3 3 8-8"/><path d="M21 12a9 9 0 1 1-9-9"/></svg></div>
+        <h3>Order Forms</h3>
+        <p>Documents to fill out to place your orders directly with the studio.</p>
+        <span class="action">Download PDF <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></span>
+      </a>
+
+      <a href="#" class="pcard">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18"/><circle cx="8" cy="14" r="1.5"/><circle cx="14" cy="14" r="1.5"/></svg></div>
+        <h3>Display Guide</h3>
+        <p>A complete guide to presenting the collection in your window and counter.</p>
+        <span class="action">Download PDF <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></span>
+      </a>
+
+      <a href="#" class="pcard">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 6h16M4 12h16M4 18h7"/></svg></div>
+        <h3>Code Guide</h3>
+        <p>Legend for product codes — finishes, colors, formats. E.g. AU101TA.</p>
+        <span class="action">Download PDF <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></span>
+      </a>
+
+      <a href="#" class="pcard">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <h3>Why Christophe Poly</h3>
+        <p>The sales pitch — the studio's story to share with your customers.</p>
+        <span class="action">Download PDF <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></span>
+      </a>
+
+      <a href="#" class="pcard">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="4" width="18" height="17" rx="1"/><path d="M3 9h18M8 3v3M16 3v3"/></svg></div>
+        <h3>Trade Show Calendar</h3>
+        <p>Dates for shows and exhibitions where you can see the wholesale collection.</p>
+        <span class="action">View calendar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+
+    </div>
+
+    <span class="pg-label">Order online</span>
+    <div class="marketplace">
+      <div class="mcard">
+        <div class="info">
+          <h3>Order via Faire.com</h3>
+          <p>Full catalog on the Faire marketplace</p>
+        </div>
+        <a href="#" class="go">Open →</a>
+      </div>
+      <div class="mcard">
+        <div class="info">
+          <h3>Order via Indième</h3>
+          <p>Full catalog on the Indième marketplace</p>
+        </div>
+        <a href="#" class="go">Open →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Christophe Poly · Crono Design Inc. · Wholesale Access</p>
+  </div>
+</footer>
+
+</body>
+</html>
