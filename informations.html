@@ -82,12 +82,6 @@
   .swatch-item .code { font-family: 'Cormorant Garant', serif; font-style: italic; font-size: 1.7rem; line-height: 1; display: block; margin-bottom: 4px; }
   .swatch-item .name { font-size: 0.76rem; font-weight: 600; color: var(--mist); text-transform: uppercase; letter-spacing: 0.06em; }
 
-  .code-box { background: var(--coal); color: var(--paper); padding: 48px; border-radius: var(--r); display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: center; max-width: 900px; }
-  .code-box .cb-left h4 { font-family: 'Inter', sans-serif; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--amber-lt); margin-bottom: 10px; }
-  .code-box .example { font-family: 'Cormorant Garant', serif; font-size: 2.6rem; font-weight: 600; letter-spacing: 0.02em; white-space: nowrap; }
-  .code-box .cb-right p { font-size: 0.95rem; color: rgba(250,246,239,0.65); line-height: 1.8; }
-  .code-box .cb-right strong { color: var(--paper); font-weight: 600; }
-
   /* ── ENTRETIEN ── */
   .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 50px; }
   .step-item { border-top: 1px solid var(--line); padding-top: 26px; }
@@ -113,6 +107,28 @@
   .f-col a:hover { color: var(--amber); }
   .footer-bottom { max-width: var(--max); margin: 80px auto 0; padding-top: 24px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--mist); }
 
+  /* ── MOBILE DRAWER ── */
+  .nav-overlay { position: fixed; inset: 0; background: rgba(30,28,26,0.45); z-index: 290; opacity: 0; visibility: hidden; transition: opacity 0.25s ease; }
+  .nav-overlay.on { opacity: 1; visibility: visible; }
+  .drawer { position: fixed; top: 0; right: -100%; width: min(330px, 87vw); height: 100vh; height: 100dvh; background: var(--paper); z-index: 300; padding: 22px 24px 34px; overflow-y: auto; border-left: 3px solid var(--amber); transition: right 0.32s cubic-bezier(0.4,0,0.2,1); display: flex; flex-direction: column; }
+  .drawer.on { right: 0; }
+  .drawer-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+  .drawer-head .dlogo { font-family: 'Cormorant Garant', serif; font-size: 1.25rem; font-weight: 600; }
+  .drawer-x { background: none; border: none; cursor: pointer; padding: 4px; color: var(--coal); line-height: 0; }
+  .drawer-x svg { width: 22px; height: 22px; }
+  .drawer-nav { list-style: none; display: flex; flex-direction: column; }
+  .drawer-nav li { border-bottom: 1px solid var(--line); }
+  .drawer-nav a { display: block; padding: 15px 2px; font-family: 'Cormorant Garant', serif; font-size: 1.35rem; font-weight: 500; transition: color 0.18s, padding 0.18s; }
+  .drawer-nav a:hover, .drawer-nav a.active { color: var(--amber); padding-left: 8px; }
+  .drawer-ctas { margin-top: 28px; display: flex; flex-direction: column; gap: 10px; }
+  .drawer-ctas a { display: flex; align-items: center; justify-content: center; padding: 14px; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.03em; border-radius: var(--r); transition: all 0.2s; }
+  .d-etsy { background: var(--amber); color: #fff; }
+  .d-etsy:hover { background: var(--amber-lt); }
+  .d-b2b { background: var(--coal); color: var(--paper); }
+  .d-b2b:hover { background: var(--coal-soft); }
+  .drawer-foot { margin-top: auto; padding-top: 24px; font-size: 0.78rem; color: var(--mist); line-height: 1.8; }
+  .drawer-foot a { color: var(--coal); font-weight: 500; }
+
   @media (max-width: 860px) {
     .h-center, .h-right .btn-etsy, .h-right .btn-b2b { display: none; }
     .hamburger { display: block; }
@@ -133,6 +149,34 @@
 </head>
 <body>
 
+  <!-- MOBILE NAV DRAWER -->
+  <div class="nav-overlay" id="navOverlay" onclick="closeDrawer()"></div>
+  <aside class="drawer" id="navDrawer" aria-label="Menu">
+    <div class="drawer-head">
+      <span class="dlogo">Christophe Poly</span>
+      <button class="drawer-x" onclick="closeDrawer()" aria-label="Fermer le menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <nav>
+      <ul class="drawer-nav">
+        <li><a href="a-propos.html">À propos</a></li>
+        <li><a href="bijoux.html">Bijoux</a></li>
+        <li><a href="informations.html" class="active">Informations</a></li>
+        <li><a href="expositions.html">Expositions</a></li>
+        <li><a href="ou-acheter.html">Où acheter</a></li>
+        <li><a href="a-propos.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="drawer-ctas">
+      <a href="https://www.etsy.com/shop/ChristophePolyDesign" target="_blank" class="d-etsy">Boutique Etsy</a>
+      <a href="espace-commercant.html" class="d-b2b">Espace commerçant</a>
+    </div>
+    <div class="drawer-foot">
+      <a href="mailto:info@christophepoly.com">info@christophepoly.com</a><br>514 278-9246
+    </div>
+  </aside>
+
   <!-- Header -->
   <header>
     <div class="h-left">
@@ -150,7 +194,7 @@
     <div class="h-right">
       <a href="https://www.etsy.com/shop/ChristophePolyDesign" target="_blank" class="btn-etsy">Boutique Etsy</a>
       <a href="espace-commercant.html" class="btn-b2b">Espace commerçant</a>
-      <button class="hamburger" aria-label="Menu">☰</button>
+      <button class="hamburger" aria-label="Ouvrir le menu" onclick="openDrawer()">☰</button>
     </div>
   </header>
 
@@ -252,15 +296,6 @@
         </div>
       </div>
 
-      <div class="code-box">
-        <div class="cb-left">
-          <h4>Décrypter la nomenclature</h4>
-          <div class="example">AU101TA</div>
-        </div>
-        <div class="cb-right">
-          <p><strong>AU</strong> — Matériau principal (Aluminium) &nbsp;·&nbsp; <strong>101</strong> — Numéro de modèle &nbsp;·&nbsp; <strong>T</strong> — Finition principale (Or) &nbsp;·&nbsp; <strong>A</strong> — Finition d'accent (Argent brillant)</p>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -354,6 +389,12 @@
       <span>Membre du Conseil des métiers d'art du Québec</span>
     </div>
   </footer>
+
+  <script>
+    function openDrawer(){document.getElementById('navDrawer').classList.add('on');document.getElementById('navOverlay').classList.add('on');document.body.style.overflow='hidden';}
+    function closeDrawer(){document.getElementById('navDrawer').classList.remove('on');document.getElementById('navOverlay').classList.remove('on');document.body.style.overflow='';}
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDrawer();});
+  </script>
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {

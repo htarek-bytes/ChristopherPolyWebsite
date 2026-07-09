@@ -691,5 +691,17 @@ function openD(){document.getElementById('dr').classList.add('on');document.getE
 function closeD(){document.getElementById('dr').classList.remove('on');document.getElementById('ov').classList.remove('on');document.body.style.overflow='';}
 function toggleSub(b){const s=b.nextElementSibling;s.classList.toggle('on');b.textContent=b.textContent.includes('▾')?b.textContent.replace('▾','▸'):b.textContent.replace('▸','▾');}
 </script>
+
+<!-- Netlify Identity : redirige vers le tableau de bord /admin après connexion (invitations / réinitialisation) -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", function(user) {
+      if (!user) {
+        window.netlifyIdentity.on("login", function() { document.location.href = "/admin/"; });
+      }
+    });
+  }
+</script>
 </body>
 </html>

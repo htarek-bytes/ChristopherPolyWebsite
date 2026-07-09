@@ -4,97 +4,273 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Espace commerçant — Christophe Poly</title>
+<meta name="description" content="Espace réservé aux boutiques et détaillants — catalogues, formulaires et outils de commande Christophe Poly.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --yellow: #F4C100; --yellow-deep: #D9A800;
-    --charcoal: #2A2A28; --charcoal-soft: #45433F;
-    --paper: #FAF7F1; --paper-dk: #F0EBE0;
-    --line: rgba(42,42,40,0.12); --ink-soft: rgba(42,42,40,0.62);
-    --radius: 2px;
+  :root {
+    --amber: #D4920A; --amber-lt: #F5C842; --amber-pale: #FDF3D8;
+    --coal: #1E1C1A; --coal-soft: #45413C;
+    --paper: #FAF6EF; --paper-dk: #F0E9DC;
+    --mist: rgba(30,28,26,0.52); --line: rgba(30,28,26,0.10);
+    --r: 2px; --max: 1200px;
   }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  body{font-family:'Inter',sans-serif;background:var(--paper);color:var(--charcoal);line-height:1.5;-webkit-font-smoothing:antialiased;}
-  a{color:inherit;text-decoration:none;}
-  .wrap{max-width:1240px;margin:0 auto;padding:0 40px;}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--paper); color: var(--coal); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { text-decoration: none; color: inherit; }
+  h1, h2, h3, h4, .display { font-family: 'Cormorant Garant', serif; font-weight: 500; }
+  em { font-style: italic; }
 
-  header{position:sticky;top:0;z-index:100;background:var(--paper);border-bottom:1px solid var(--line);}
-  .header-inner{display:flex;align-items:center;justify-content:space-between;padding:22px 40px;max-width:1240px;margin:0 auto;}
-  .logo{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:500;}
-  .logo span{display:block;font-family:'Inter',sans-serif;font-size:0.62rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-soft);margin-top:3px;}
-  nav ul{display:flex;gap:38px;list-style:none;}
-  nav a{font-size:0.85rem;font-weight:500;}
-  nav a:hover{opacity:0.6;}
-  .breadcrumb{font-size:0.78rem;color:var(--ink-soft);}
-  .breadcrumb a:hover{color:var(--charcoal);}
+  /* ── SHARED HEADER ── */
+  header { position: sticky; top: 0; z-index: 100; background: var(--paper); height: 66px; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; }
+  .h-left { display: flex; flex-direction: column; }
+  .h-left .logo { font-family: 'Cormorant Garant', serif; font-weight: 600; font-size: 1.3rem; line-height: 1; }
+  .h-left .subline { font-family: 'Inter', sans-serif; font-weight: 500; text-transform: uppercase; font-size: 0.58rem; color: var(--mist); margin-top: 4px; letter-spacing: 0.05em; }
+  .h-center { display: flex; gap: 32px; }
+  .h-center a { font-size: 0.85rem; transition: color 0.2s; }
+  .h-center a:hover, .h-center a.active { color: var(--amber); }
+  .h-center a.active { font-weight: 600; }
+  .h-right { display: flex; align-items: center; gap: 16px; }
+  .btn-etsy, .btn-b2b { padding: 8px 16px; font-size: 0.8rem; font-weight: 500; border-radius: var(--r); transition: all 0.2s ease; }
+  .btn-etsy { background: var(--amber); color: #fff; }
+  .btn-etsy:hover { background: var(--amber-lt); transform: translateY(-1px); }
+  .btn-b2b { background: var(--coal); color: var(--paper); }
+  .btn-b2b:hover { background: var(--coal-soft); transform: translateY(-1px); }
+  .hamburger { display: none; background: none; border: none; font-size: 1.5rem; color: var(--coal); cursor: pointer; }
 
-  .eyebrow{font-size:0.72rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--yellow-deep);margin-bottom:18px;display:block;}
+  /* ── MOBILE DRAWER ── */
+  .nav-overlay { position: fixed; inset: 0; background: rgba(30,28,26,0.45); z-index: 290; opacity: 0; visibility: hidden; transition: opacity 0.25s ease; }
+  .nav-overlay.on { opacity: 1; visibility: visible; }
+  .drawer { position: fixed; top: 0; right: -100%; width: min(330px, 87vw); height: 100vh; height: 100dvh; background: var(--paper); z-index: 300; padding: 22px 24px 34px; overflow-y: auto; border-left: 3px solid var(--amber); transition: right 0.32s cubic-bezier(0.4,0,0.2,1); display: flex; flex-direction: column; }
+  .drawer.on { right: 0; }
+  .drawer-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+  .drawer-head .dlogo { font-family: 'Cormorant Garant', serif; font-size: 1.25rem; font-weight: 600; }
+  .drawer-x { background: none; border: none; cursor: pointer; padding: 4px; color: var(--coal); line-height: 0; }
+  .drawer-x svg { width: 22px; height: 22px; }
+  .drawer-nav { list-style: none; display: flex; flex-direction: column; }
+  .drawer-nav li { border-bottom: 1px solid var(--line); }
+  .drawer-nav a { display: block; padding: 15px 2px; font-family: 'Cormorant Garant', serif; font-size: 1.35rem; font-weight: 500; transition: color 0.18s, padding 0.18s; }
+  .drawer-nav a:hover, .drawer-nav a.active { color: var(--amber); padding-left: 8px; }
+  .drawer-ctas { margin-top: 28px; display: flex; flex-direction: column; gap: 10px; }
+  .drawer-ctas a { display: flex; align-items: center; justify-content: center; padding: 14px; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.03em; border-radius: var(--r); transition: all 0.2s; }
+  .d-etsy { background: var(--amber); color: #fff; }
+  .d-etsy:hover { background: var(--amber-lt); }
+  .d-b2b { background: var(--coal); color: var(--paper); }
+  .d-b2b:hover { background: var(--coal-soft); }
+  .drawer-foot { margin-top: auto; padding-top: 24px; font-size: 0.78rem; color: var(--mist); line-height: 1.8; }
+  .drawer-foot a { color: var(--coal); font-weight: 500; }
 
-  /* HERO */
-  .hero{padding:80px 0 100px;border-bottom:1px solid var(--line);}
-  .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:70px;align-items:center;}
-  .hero h1{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(2.1rem,3.4vw,3rem);line-height:1.12;margin-bottom:24px;max-width:560px;}
-  .hero p{font-size:1.05rem;color:var(--ink-soft);max-width:480px;margin-bottom:34px;}
-  .hero-stats{display:flex;gap:44px;}
-  .hero-stats div strong{display:block;font-family:'Fraunces',serif;font-size:1.7rem;font-weight:500;}
-  .hero-stats div span{font-size:0.78rem;color:var(--ink-soft);}
+  .breadcrumb { max-width: var(--max); margin: 30px auto 0; padding: 0 40px; font-size: 0.72rem; color: var(--mist); }
+  .breadcrumb a:hover { color: var(--coal); }
 
-  .access-card{background:var(--charcoal);color:var(--paper);padding:44px;border-radius:var(--radius);}
-  .access-card .tag{font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--yellow);margin-bottom:20px;display:block;}
-  .access-card h2{font-family:'Fraunces',serif;font-weight:500;font-size:1.5rem;line-height:1.25;margin-bottom:16px;}
-  .access-card p{font-size:0.92rem;color:rgba(250,247,241,0.65);margin-bottom:28px;}
-  .code-field{display:flex;gap:10px;margin-bottom:18px;}
-  .code-field input{flex:1;background:rgba(250,247,241,0.08);border:1px solid rgba(250,247,241,0.2);color:var(--paper);padding:14px 16px;font-size:0.95rem;border-radius:var(--radius);letter-spacing:0.05em;}
-  .btn-yellow{background:var(--yellow);color:var(--charcoal);padding:14px 24px;font-size:0.88rem;font-weight:600;border-radius:var(--radius);border:none;cursor:pointer;}
-  .access-card .request{font-size:0.84rem;border-bottom:1px solid rgba(250,247,241,0.3);padding-bottom:2px;display:inline-block;}
+  /* ── HERO ── */
+  .hero { max-width: var(--max); margin: 0 auto; padding: 60px 40px 100px; }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 70px; align-items: center; }
+  .eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); margin-bottom: 22px; display: block; }
+  .hero h1 { font-size: clamp(2.3rem, 4vw, 3.4rem); line-height: 1.05; margin-bottom: 22px; max-width: 560px; }
+  .hero h1 em { color: var(--amber); }
+  .hero .lede { font-size: 1.05rem; color: var(--coal-soft); max-width: 480px; margin-bottom: 34px; }
+  .hero-stats { display: flex; gap: 44px; padding-top: 30px; border-top: 1px solid var(--line); }
+  .hero-stats div strong { display: block; font-family: 'Cormorant Garant', serif; font-size: 2rem; font-weight: 600; line-height: 1; }
+  .hero-stats div span { font-size: 0.78rem; color: var(--mist); margin-top: 4px; display: block; }
 
-  footer{padding:50px 0;border-top:1px solid var(--line);text-align:center;}
-  footer p{font-size:0.8rem;color:var(--ink-soft);}
+  /* ── ACCESS CARD ── */
+  .access-card { background: var(--coal); color: var(--paper); padding: 44px; border-radius: var(--r); position: relative; overflow: hidden; }
+  .access-card::before { content: ''; position: absolute; inset: 0; opacity: 0.07; pointer-events: none; background: radial-gradient(circle at 85% 12%, var(--amber) 0%, transparent 45%); }
+  .access-card > * { position: relative; z-index: 1; }
+  .access-card .tag { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber-lt); margin-bottom: 20px; display: block; }
+  .access-card h2 { font-size: 1.7rem; line-height: 1.2; margin-bottom: 14px; }
+  .access-card p { font-size: 0.92rem; color: rgba(250,246,239,0.62); margin-bottom: 26px; }
+  .code-field { display: flex; gap: 10px; margin-bottom: 18px; }
+  .code-field input { flex: 1; background: rgba(250,246,239,0.07); border: 1px solid rgba(250,246,239,0.2); color: var(--paper); padding: 14px 16px; font-size: 0.95rem; border-radius: var(--r); letter-spacing: 0.05em; font-family: 'Inter', sans-serif; }
+  .code-field input::placeholder { color: rgba(250,246,239,0.4); }
+  .code-field input:focus { outline: none; border-color: var(--amber); }
+  .btn-yellow { background: var(--amber); color: var(--coal); padding: 14px 24px; font-size: 0.88rem; font-weight: 600; border-radius: var(--r); border: none; cursor: pointer; transition: background 0.2s; }
+  .btn-yellow:hover { background: var(--amber-lt); }
+  .access-card .request { font-size: 0.84rem; color: rgba(250,246,239,0.8); border-bottom: 1px solid rgba(250,246,239,0.3); padding-bottom: 2px; display: inline-block; transition: border-color 0.2s; }
+  .access-card .request:hover { border-color: var(--amber); }
+
+  /* ── BENEFITS BAND ── */
+  .blade { width: 100%; height: 3px; background: var(--amber); }
+  .benefits { background: var(--paper-dk); padding: 90px 0; }
+  .benefits-inner { max-width: var(--max); margin: 0 auto; padding: 0 40px; }
+  .benefits h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: 48px; max-width: 560px; }
+  .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .benefit { background: var(--paper); padding: 34px 28px; }
+  .benefit .num { font-family: 'Cormorant Garant', serif; font-style: italic; font-size: 1.6rem; color: var(--amber); display: block; margin-bottom: 16px; line-height: 1; }
+  .benefit h3 { font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 600; margin-bottom: 8px; }
+  .benefit p { font-size: 0.88rem; color: var(--coal-soft); }
+
+  /* ── MARKETPLACE STRIP ── */
+  .marketplaces { max-width: var(--max); margin: 0 auto; padding: 90px 40px; }
+  .marketplaces .label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); margin-bottom: 22px; display: block; }
+  .mp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .mp-card { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 26px; border: 1px solid var(--line); border-radius: var(--r); transition: border-color 0.2s, background 0.2s; }
+  .mp-card:hover { border-color: var(--amber); background: rgba(212,146,10,0.035); }
+  .mp-card h3 { font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
+  .mp-card p { font-size: 0.82rem; color: var(--mist); }
+  .mp-card .go { flex-shrink: 0; background: var(--coal); color: var(--paper); padding: 11px 22px; font-size: 0.8rem; font-weight: 600; border-radius: var(--r); white-space: nowrap; transition: background 0.15s; }
+  .mp-card .go:hover { background: var(--coal-soft); }
+
+  /* ── FOOTER ── */
+  footer { border-top: 3px solid var(--coal); background: var(--paper); padding: 60px 40px 30px; }
+  .footer-bottom { max-width: var(--max); margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--mist); }
+
+  @media (max-width: 860px) {
+    .h-center, .h-right .btn-etsy, .h-right .btn-b2b { display: none; }
+    .hamburger { display: block; }
+    .hero { padding: 40px 20px 60px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .breadcrumb { padding: 0 20px; }
+    .benefits { padding: 60px 0; }
+    .benefits-inner, .marketplaces { padding-left: 20px; padding-right: 20px; }
+    .benefits-grid { grid-template-columns: 1fr; }
+    .mp-grid { grid-template-columns: 1fr; }
+    .mp-card { flex-direction: column; align-items: flex-start; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="header-inner">
-    <a href="index.html" class="logo">Christophe Poly<span>Bijoux d'art · fait main · Montréal</span></a>
+  <!-- MOBILE NAV DRAWER -->
+  <div class="nav-overlay" id="navOverlay" onclick="closeDrawer()"></div>
+  <aside class="drawer" id="navDrawer" aria-label="Menu">
+    <div class="drawer-head">
+      <span class="dlogo">Christophe Poly</span>
+      <button class="drawer-x" onclick="closeDrawer()" aria-label="Fermer le menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
     <nav>
-      <ul>
+      <ul class="drawer-nav">
         <li><a href="a-propos.html">À propos</a></li>
         <li><a href="bijoux.html">Bijoux</a></li>
         <li><a href="informations.html">Informations</a></li>
         <li><a href="expositions.html">Expositions</a></li>
         <li><a href="ou-acheter.html">Où acheter</a></li>
+        <li><a href="a-propos.html#contact">Contact</a></li>
       </ul>
     </nav>
-    <div class="breadcrumb"><a href="index.html">Accueil</a> / Espace commerçant</div>
-  </div>
-</header>
+    <div class="drawer-ctas">
+      <a href="https://www.etsy.com/shop/ChristophePolyDesign" target="_blank" class="d-etsy">Boutique Etsy</a>
+      <a href="espace-commercant.html" class="d-b2b">Espace commerçant</a>
+    </div>
+    <div class="drawer-foot">
+      <a href="mailto:info@christophepoly.com">info@christophepoly.com</a><br>514 278-9246
+    </div>
+  </aside>
 
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <span class="eyebrow">Réservé aux boutiques</span>
-      <h1>Un partenariat avec une signature reconnue depuis plus de 20 ans.</h1>
-      <p>Catalogues, formulaires, outils de commande — tout ce qu'il faut pour vendre Christophe Poly en boutique.</p>
-      <div class="hero-stats">
-        <div><strong>30+</strong><span>ans en boutique</span></div>
-        <div><strong>100%</strong><span>fait main, Montréal</span></div>
+  <!-- Header -->
+  <header>
+    <div class="h-left">
+      <a href="index.html" class="logo">Christophe Poly</a>
+      <span class="subline">Bijoux artisanaux · Montréal</span>
+    </div>
+    <nav class="h-center">
+      <a href="a-propos.html">À propos</a>
+      <a href="bijoux.html">Bijoux</a>
+      <a href="informations.html">Informations</a>
+      <a href="expositions.html">Expositions</a>
+      <a href="ou-acheter.html">Où acheter</a>
+    </nav>
+    <div class="h-right">
+      <a href="https://www.etsy.com/shop/ChristophePolyDesign" target="_blank" class="btn-etsy">Boutique Etsy</a>
+      <a href="espace-commercant.html" class="btn-b2b">Espace commerçant</a>
+      <button class="hamburger" aria-label="Ouvrir le menu" onclick="openDrawer()">☰</button>
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb"><a href="index.html">Accueil</a> › Espace commerçant</div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Réservé aux boutiques</span>
+        <h1>Un partenariat direct avec l'atelier, <em>depuis plus de 30 ans.</em></h1>
+        <p class="lede">Catalogues, formulaires et outils de commande — tout ce qu'il faut pour présenter et vendre Christophe Poly en boutique.</p>
+        <div class="hero-stats">
+          <div><strong>30+</strong><span>ans en boutique</span></div>
+          <div><strong>700+</strong><span>modèles disponibles</span></div>
+          <div><strong>100%</strong><span>fait main, Montréal</span></div>
+        </div>
+      </div>
+      <div class="access-card">
+        <span class="tag">Accès commerçant</span>
+        <h2>Vous avez déjà un code d'accès ?</h2>
+        <p>Entrez votre code pour accéder au portail : catalogue, formulaires de commande et argumentaire de vente.</p>
+        <form class="code-field" action="portail-interne.html" method="get">
+          <input type="text" placeholder="Code d'accès" aria-label="Code d'accès">
+          <button type="submit" class="btn-yellow">Accéder</button>
+        </form>
+        <a href="mailto:info@christophepoly.com?subject=Demande%20d'accès%20commerçant" class="request">Pas encore de code ? Faites une demande →</a>
       </div>
     </div>
-    <div class="access-card">
-      <span class="tag">Accès commerçant</span>
-      <h2>Vous avez déjà un code d'accès ?</h2>
-      <form class="code-field" action="portail-interne.html" method="get">
-        <input type="text" placeholder="Code d'accès" aria-label="Code d'accès">
-        <button type="submit" class="btn-yellow">Accéder</button>
-      </form>
-      <a href="mailto:info@christophepoly.com" class="request">Pas encore de code ? Faites une demande →</a>
-    </div>
-  </div>
-</section>
+  </section>
 
-<footer><div class="wrap"><p>© 2026 Christophe Poly · Crono Design Inc.</p></div></footer>
+  <div class="blade"></div>
+
+  <!-- Benefits -->
+  <section class="benefits">
+    <div class="benefits-inner">
+      <h2 class="display">Ce que vous obtenez comme partenaire.</h2>
+      <div class="benefits-grid">
+        <div class="benefit">
+          <span class="num">i</span>
+          <h3>Collections saisonnières</h3>
+          <p>De nouveaux modèles et catégories chaque saison pour renouveler votre présentoir et fidéliser vos clientes.</p>
+        </div>
+        <div class="benefit">
+          <span class="num">ii</span>
+          <h3>Contact direct avec l'atelier</h3>
+          <p>Pas d'intermédiaire. Vous parlez directement à Christophe et son équipe pour vos commandes et questions.</p>
+        </div>
+        <div class="benefit">
+          <span class="num">iii</span>
+          <h3>Outils prêts à vendre</h3>
+          <p>Catalogues, guide des codes, argumentaire de vente et guides de présentoirs — tout est fourni.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marketplaces -->
+  <section class="marketplaces">
+    <span class="label">Commander en ligne</span>
+    <div class="mp-grid">
+      <div class="mp-card">
+        <div>
+          <h3>Commander sur Faire.com</h3>
+          <p>Catalogue complet sur la marketplace Faire</p>
+        </div>
+        <a href="https://www.faire.com/direct/christophepolycronodesign" target="_blank" class="go">Ouvrir →</a>
+      </div>
+      <div class="mp-card">
+        <div>
+          <h3>Commander sur Indième</h3>
+          <p>Catalogue complet sur la marketplace Indième</p>
+        </div>
+        <a href="https://www.indieme.com/Store/VendorID/27784" target="_blank" class="go">Ouvrir →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-bottom">
+      <span>© 2026 Christophe Poly · Crono Design Inc.</span>
+      <span>Membre du Conseil des métiers d'art du Québec</span>
+    </div>
+  </footer>
+
+  <script>
+    function openDrawer(){document.getElementById('navDrawer').classList.add('on');document.getElementById('navOverlay').classList.add('on');document.body.style.overflow='hidden';}
+    function closeDrawer(){document.getElementById('navDrawer').classList.remove('on');document.getElementById('navOverlay').classList.remove('on');document.body.style.overflow='';}
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDrawer();});
+  </script>
 </body>
 </html>

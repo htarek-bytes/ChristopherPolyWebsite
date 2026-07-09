@@ -1,0 +1,60 @@
+# ─────────────────────────────────────────────────────────────
+#  Christophe Poly — Tableau de bord d'administration (Decap CMS)
+#  Objectif : modifier / ajouter / supprimer TOUTES les photos
+#  et les PDF du site, en quelques clics, sans compétence technique.
+# ─────────────────────────────────────────────────────────────
+
+backend:
+  name: git-gateway          # Aucune installation serveur : passe par Netlify
+  branch: main               # Les changements sont publiés sur cette branche
+
+# Interface en français
+locale: "fr"
+
+# Emplacement par défaut des NOUVELLES photos téléversées
+media_folder: "imgs"
+public_folder: "/imgs"
+
+# Message d'aide affiché en haut du tableau de bord
+site_url: https://christophepoly.com
+display_url: https://christophepoly.com
+logo_url: /imgs/Christophe1.jpg
+
+collections:
+  # ── 1. PHOTOS DU SITE ────────────────────────────────────────
+  - name: "photos"
+    label: "Photos du site"
+    label_singular: "Groupe de photos"
+    description: >
+      Remplacez ou ajoutez les photos affichées sur le site.
+      Astuce : pour REMPLACER une image, téléversez la nouvelle
+      en gardant EXACTEMENT le même nom de fichier que l'ancienne.
+    delete: false
+    files:
+      - name: "identite"
+        label: "Portraits & atelier (Accueil / À propos)"
+        file: "_data/photos.json"
+        fields:
+          - { label: "Portrait principal de Christophe", name: "portrait1", widget: "image", media_folder: "/imgs", public_folder: "/imgs", required: false }
+          - { label: "Christophe — photo secondaire", name: "portrait2", widget: "image", media_folder: "/imgs", public_folder: "/imgs", required: false }
+          - { label: "Atelier — photo 1", name: "atelier1", widget: "image", media_folder: "/imgs", public_folder: "/imgs", required: false }
+          - { label: "Atelier — photo 2", name: "atelier2", widget: "image", media_folder: "/imgs", public_folder: "/imgs", required: false }
+          - { label: "Atelier — photo 3", name: "atelier3", widget: "image", media_folder: "/imgs", public_folder: "/imgs", required: false }
+
+  # ── 2. DOCUMENTS PDF ─────────────────────────────────────────
+  - name: "documents"
+    label: "Documents PDF"
+    label_singular: "Document"
+    description: >
+      Téléversez les nouvelles versions des PDF du portail commerçant
+      (catalogue, codes produit, brochure). Gardez le même nom de
+      fichier pour remplacer automatiquement l'ancien.
+    delete: false
+    files:
+      - name: "portail"
+        label: "PDF du portail commerçant"
+        file: "_data/documents.json"
+        fields:
+          - { label: "Catalogue complet (PDF)", name: "catalogue", widget: "file", media_folder: "/pdfs", public_folder: "/pdfs", required: false }
+          - { label: "Codes produit (PDF)", name: "codes", widget: "file", media_folder: "/pdfs", public_folder: "/pdfs", required: false }
+          - { label: "Brochure — argumentaire (PDF)", name: "brochure", widget: "file", media_folder: "/pdfs", public_folder: "/pdfs", required: false }
