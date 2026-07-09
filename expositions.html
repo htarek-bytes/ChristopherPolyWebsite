@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expositions &amp; Salons — Christophe Poly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--amber:#D4920A;--amber-lt:#F5C842;--amber-pale:#FDF3D8;--coal:#1E1C1A;--coal-soft:#45413C;--paper:#FAF6EF;--paper-dk:#F0E9DC;--mist:rgba(30,28,26,.52);--line:rgba(30,28,26,.10);--r:2px;--max:1200px;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--paper);color:var(--coal);line-height:1.6;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 48px;}
+.display{font-family:'Cormorant Garant',serif;font-weight:500;line-height:1.05;letter-spacing:-.01em;}
+.label{font-size:.68rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--mist);}
+.label-amber{color:var(--amber);}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;font-size:.78rem;font-weight:600;letter-spacing:.04em;border-radius:var(--r);transition:all .2s;cursor:pointer;border:none;}
+.btn-coal{background:var(--coal);color:var(--paper);}
+.btn-coal:hover{background:var(--coal-soft);}
+.btn-ghost{background:transparent;color:var(--coal);border:1px solid var(--coal);}
+.btn-ghost:hover{background:var(--coal);color:var(--paper);}
+.blade{height:3px;background:var(--amber);width:100%;}
+
+/* HEADER (shared) */
+.site-header{position:sticky;top:0;z-index:100;background:var(--paper);border-bottom:1px solid var(--line);}
+.hbar{display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:66px;max-width:var(--max);margin:0 auto;}
+.hlogo{font-family:'Cormorant Garant',serif;font-size:1.35rem;font-weight:600;letter-spacing:.02em;line-height:1.1;}
+.hlogo small{display:block;font-family:'Inter',sans-serif;font-size:.58rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--mist);margin-top:2px;}
+.hnav{display:flex;gap:2px;list-style:none;align-items:center;}
+.hnav>li>a{font-size:.78rem;font-weight:500;padding:8px 12px;border-radius:var(--r);transition:background .15s;white-space:nowrap;}
+.hnav>li>a:hover,.hnav>li.active>a{background:var(--paper-dk);}
+.hnav>li.active>a{font-weight:600;color:var(--amber);}
+.hright{display:flex;align-items:center;gap:8px;}
+.lang-toggle{font-size:.72rem;font-weight:600;color:var(--mist);padding:6px 8px;border-radius:var(--r);}
+.lang-toggle:hover{color:var(--coal);}
+.hright .btn{font-size:.72rem;padding:9px 16px;}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px;}
+.hamburger svg{width:20px;height:20px;}
+
+/* PAGE HERO */
+.page-hero{padding:80px 0 72px;border-bottom:1px solid var(--line);}
+.page-hero .breadcrumb{font-size:.72rem;color:var(--mist);margin-bottom:20px;}
+.page-hero .breadcrumb a{color:var(--mist);}
+.page-hero .breadcrumb a:hover{color:var(--coal);}
+.page-hero .breadcrumb span{margin:0 8px;opacity:.4;}
+.page-hero-inner{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap;}
+.page-hero h1{font-size:clamp(2.4rem,4vw,4rem);}
+.page-hero h1 em{font-style:italic;color:var(--amber);}
+.page-hero-right{max-width:380px;}
+.page-hero-right p{color:var(--mist);font-size:.96rem;margin-bottom:0;}
+
+/* FILTER TABS */
+.filter-bar{padding:32px 0;border-bottom:1px solid var(--line);position:sticky;top:66px;z-index:50;background:var(--paper);}
+.filter-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;}
+.filter-tabs{display:flex;gap:4px;}
+.filter-tab{background:none;border:1px solid var(--line);padding:8px 18px;border-radius:100px;font-size:.76rem;font-weight:500;cursor:pointer;transition:all .18s;font-family:'Inter',sans-serif;color:var(--coal);}
+.filter-tab:hover{border-color:var(--coal);}
+.filter-tab.active{background:var(--coal);color:var(--paper);border-color:var(--coal);}
+.filter-count{font-size:.76rem;color:var(--mist);}
+
+/* TIMELINE CALENDAR */
+.calendar{padding:72px 0 100px;}
+.year-group{margin-bottom:72px;}
+.year-label{font-family:'Cormorant Garant',serif;font-size:5rem;font-weight:400;color:var(--line);letter-spacing:-.03em;margin-bottom:0;line-height:1;user-select:none;}
+.month-group{margin-bottom:8px;}
+.month-header{display:flex;align-items:center;gap:16px;padding:20px 0 14px;border-bottom:1px solid var(--line);}
+.month-name{font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);min-width:100px;}
+.month-rule{flex:1;height:1px;background:var(--line);}
+
+/* Event rows */
+.event-row{
+  display:grid;
+  grid-template-columns:80px 1fr auto;
+  align-items:start;
+  gap:24px;
+  padding:22px 0;
+  border-bottom:1px solid var(--line);
+  transition:background .15s;
+  border-radius:var(--r);
+  margin:0 -16px;
+  padding-left:16px;
+  padding-right:16px;
+}
+.event-row:hover{background:var(--amber-pale);}
+.event-row:last-child{border-bottom:none;}
+
+/* Date block */
+.ev-date{text-align:center;padding-top:2px;}
+.ev-date .day-range{font-family:'Cormorant Garant',serif;font-size:2rem;font-weight:500;line-height:1;color:var(--coal);}
+.ev-date .day-range.multi{font-size:1.4rem;}
+.ev-date .weekday{font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);margin-top:4px;}
+
+/* Event details */
+.ev-body{}
+.ev-name{font-size:1rem;font-weight:600;color:var(--coal);margin-bottom:6px;}
+.ev-loc{display:flex;align-items:flex-start;gap:6px;font-size:.82rem;color:var(--mist);margin-bottom:8px;}
+.ev-loc svg{flex-shrink:0;margin-top:2px;}
+.ev-address{font-size:.78rem;color:var(--mist);}
+.ev-tags{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;}
+.ev-tag{padding:3px 10px;border-radius:100px;font-size:.64rem;font-weight:600;letter-spacing:.04em;}
+.ev-tag-expo{background:var(--amber-pale);color:var(--amber);}
+.ev-tag-salon{background:#EAF0FF;color:#3B5EC4;}
+.ev-tag-gros{background:#F0EAF5;color:#7B3FA0;}
+
+/* Right action */
+.ev-action{padding-top:4px;}
+.ev-action a{font-size:.74rem;font-weight:600;color:var(--mist);border:1px solid var(--line);padding:7px 14px;border-radius:100px;white-space:nowrap;transition:all .18s;}
+.ev-action a:hover{border-color:var(--amber);color:var(--amber);}
+
+/* Empty state */
+.empty-state{padding:80px 0;text-align:center;}
+.empty-state p{color:var(--mist);margin-top:12px;}
+
+/* SUBSCRIBE STRIP */
+.notify-strip{background:var(--coal);color:var(--paper);padding:70px 0;}
+.notify-inner{display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+.notify-inner h2{font-family:'Cormorant Garant',serif;font-size:clamp(1.5rem,2.4vw,2rem);font-weight:500;max-width:460px;}
+.notify-inner p{color:rgba(250,246,239,.55);font-size:.88rem;margin-top:8px;}
+.notify-form{display:flex;gap:8px;}
+.notify-form input{background:rgba(250,246,239,.08);border:1px solid rgba(250,246,239,.2);color:var(--paper);padding:12px 18px;font-size:.86rem;border-radius:var(--r);width:240px;font-family:'Inter',sans-serif;}
+.notify-form input::placeholder{color:rgba(250,246,239,.35);}
+.notify-form input:focus{outline:2px solid var(--amber);outline-offset:1px;}
+.notify-form .btn-amber{background:var(--amber);color:var(--paper);padding:12px 20px;font-size:.8rem;font-weight:600;border:none;border-radius:var(--r);cursor:pointer;transition:background .18s;}
+.notify-form .btn-amber:hover{background:#B87E08;}
+
+/* FOOTER */
+footer{padding:48px 0 28px;border-top:3px solid var(--coal);}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;font-size:.72rem;color:var(--mist);}
+.foot-bottom a{color:var(--mist);}
+.foot-bottom a:hover{color:var(--amber);}
+
+@media(max-width:860px){
+  .wrap,.hbar{padding-left:24px;padding-right:24px;}
+  .hnav,.hright .btn-coal,.hright .btn-amber{display:none;}
+  .hamburger{display:block;}
+  .filter-inner{flex-direction:column;align-items:flex-start;gap:12px;}
+  .filter-tabs{flex-wrap:wrap;}
+  .event-row{grid-template-columns:60px 1fr;gap:16px;}
+  .ev-action{display:none;}
+  .notify-inner{flex-direction:column;gap:24px;}
+  .notify-form{flex-direction:column;}
+  .notify-form input{width:100%;}
+}
+@media(prefers-reduced-motion:reduce){*{transition-duration:.01ms !important;}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="hbar">
+    <a href="index.html" class="hlogo">Christophe Poly<small>Bijoux artisanaux · Montréal</small></a>
+    <nav><ul class="hnav">
+      <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="bijoux.html">Bijoux</a></li>
+      <li><a href="informations.html">Informations</a></li>
+      <li class="active"><a href="expositions.html">Expositions</a></li>
+      <li><a href="ou-acheter.html">Où acheter</a></li>
+    </ul></nav>
+    <div class="hright">
+      <a href="https://www.etsy.com/shop/ChristophePolyDesign" target="_blank" class="btn btn-amber" style="font-size:.72rem;padding:9px 16px;">Boutique Etsy</a>
+      <a href="espace-commercant.html" class="btn btn-coal" style="font-size:.72rem;padding:9px 16px;">Espace commerçant</a>
+      <button class="hamburger" aria-label="Menu">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="2" y1="5" x2="18" y2="5"/><line x1="2" y1="10" x2="18" y2="10"/><line x1="2" y1="15" x2="18" y2="15"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="breadcrumb">
+      <a href="index.html">Accueil</a><span>›</span>Expositions
+    </div>
+    <div class="page-hero-inner">
+      <h1 class="display">Expositions<br>&amp; <em>salons</em>.</h1>
+      <div class="page-hero-right">
+        <p>Retrouvez Christophe Poly dans les salons d'art et expositions à travers le Québec et le Canada. Venez découvrir les nouvelles collections en personne.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="blade"></div>
+
+<div class="filter-bar">
+  <div class="wrap">
+    <div class="filter-inner">
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterEvents('all',this)">Tout — 2026</button>
+        <button class="filter-tab" onclick="filterEvents('expo',this)">Expositions</button>
+        <button class="filter-tab" onclick="filterEvents('salon',this)">Salons artisanaux</button>
+        <button class="filter-tab" onclick="filterEvents('gros',this)">Salons en gros</button>
+      </div>
+      <span class="filter-count" id="count">8 événements</span>
+    </div>
+  </div>
+</div>
+
+<section class="calendar">
+  <div class="wrap" id="calendar-wrap">
+
+    <!-- 2026 -->
+    <div class="year-group">
+      <div class="year-label">2026</div>
+
+      <!-- JUILLET -->
+      <div class="month-group" data-month="juillet">
+        <div class="month-header">
+          <span class="month-name">Juillet</span>
+          <div class="month-rule"></div>
+        </div>
+
+        <div class="event-row" data-type="salon">
+          <div class="ev-date">
+            <div class="day-range multi">18–19</div>
+            <div class="weekday">Sam–Dim</div>
+          </div>
+          <div class="ev-body">
+            <div class="ev-name">Marché des artisans de l'Outaouais</div>
+            <div class="ev-loc">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+              Gatineau (QC)
+            </div>
+            <div class="ev-address">Parc Jacques-Cartier, Gatineau, Québec</div>
+            <div class="ev-tags"><span class="ev-tag ev-tag-salon">Salon artisanal</span></div>
+          </div>
+          <div class="ev-action"><a href="#">Détails →</a></div>
+        </div>
+      </div>
+
+      <!-- AOÛT -->
+      <div class="month-group" data-month="aout">
+        <div class="month-header">
+          <span class="month-name">Août</span>
+          <div class="month-rule"></div>
+        </div>
+
+        <div class="event-row" data-type="salon">
+          <div class="ev-date">
+            <div class="day-range multi">14–17</div>
+            <div class="weekday">Ven–Lun</div>
+          </div>
+          <div class="ev-body">
+            <div class="ev-name">Salon des métiers d'art de Québec — Été</div>
+            <div class="ev-loc">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+              Québec (QC)
+            </div>
+            <div class="ev-address">Vieux-Port de Québec, Québec (QC) G1K 3Y2</div>
+            <div class="ev-tags"><span class="ev-tag ev-tag-salon">Salon artisanal</span></div>
+          </div>
+          <div class="ev-action"><a href="#">Détails →</a></div>
+        </div>
+
+        <div class="event-row" data-type="expo">
+          <div class="ev-date">
+            <div class="day-range multi">22–30</div>
+            <div class="weekday">Sam–Dim</div>
+          </div>
+          <div class="ev-body">
+            <div class="ev-name">Exposition — Galerie d'art MATERIA</div>
+            <div class="ev-loc">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+              Montréal (QC)
+            </div>
+            <div class="ev-address">4067, rue Saint-Denis, Montréal (QC) H2W 2M7</div>
+            <div class="ev-tags"><span class="ev-tag ev-tag-expo">Exposition</span></div>
+          </div>
+          <div class="ev-action"><a href="#">Détails →</a></div>
+        </div>
+      </div>
+
+      <!-- SEPTEMBRE -->
+      <div class="month-group" data-month="septembre">
+        <div class="month-header">
+          <span class="month-name">Septembre</span>
+          <div class="month-rule"></div>
+        </div>
+
+        <div class="event-row" data-type="gros">
+          <div class="ev-date">
+            <div class="day-range multi">12–14</div>
+            <div class="weekday">Sam–Lun</div>
+          </div>
+          <div class="ev-body">
+            <div class="ev-name">Salon Faire — Marché en gros automne</div>
+            <div class="ev-loc">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+              Toronto (ON)
+            </div>
+            <div class="ev-address">Metro Toronto Convention Centre, Toronto (ON) M5V 3C6</div>
+            <div class="ev-tags"><span class="ev-tag ev-tag-gros">Salon en gros</span></div>
+          </div>
+          <div class="ev-action"><a href="#">Détails →</a></div>
+        </div>
+      </div>
+
+      <!-- OCTOBRE -->
+      <div class="month-group" data-month="octobre">
+        <div class="month-header">
+          <span class="month-name">Octobre</span>
+          <div class="month-rule"></div>
+        </div>
+
+        <div class="event-row" data-type="salon">
+          <div class="ev-date">
+            <div class="day-range multi">3–5</div>
+            <div class="weekday">Sam–Lun</div>
+          </div>
+          <div class="ev-body">
+            <div class="ev-name">Créateurs en vedette — Automne</div>
+            <div class="ev-loc">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+              Montréal (QC)
+            </div>
+            <div class="ev-address">Marché Bonsecours, 350 rue Saint-Paul E, Montréal (QC) H2Y 1H2</div>
+            <div class="ev-tags"><span class="ev-tag ev-tag-salon">Salon artisanal</span></div>
+          </div>
+          <div class="ev-action"><a href="#">Détails →</a></div>
+        </div>
+
+        <div class="event-row" data-type="expo">
+          <div class="ev-date">
+            <div class="day-range multi">17–25</div>
+            <div class="weekday">Sam–Dim</div>
+          </div>
+          <div class="ev-body">
+            <div class="ev-name">Semaine design Montréal — Vitrine artisans</div>
+            <div class="ev-loc">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+              Montréal (QC)
+            </div>
+            <div class="ev-address">Quartier des spectacles, Montréal (QC)</div>
+            <div class="ev-tags"><span class="ev-tag ev-tag-expo">Exposition</span></div>
+          </div>
+          <div class="ev-action"><a href="#">Détails →</a></div>
+        </div>
+      </div>
+
+      <!-- NOVEMBRE -->
+      <div class="month-group" data-month="novembre">
+        <div class="month-header">
+          <span class="month-name">Novembre</span>
+          <div class="month-rule"></div>
+        </div>
+
+        <div class="event-row" data-type="salon">
+          <div class="ev-date">
+            <div class="day-range multi">20–23</div>
+            <div class="weekday">Jeu–Dim</div>
+          </div>
+          <div class="ev-body">
+            <div class="ev-name">Salon des métiers d'art de Montréal</div>
+            <div class="ev-loc">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+              Montréal (QC)
+            </div>
+            <div class="ev-address">Place Bonaventure, 800 rue De La Gauchetière O, Montréal (QC) H5A 1K6</div>
+            <div class="ev-tags"><span class="ev-tag ev-tag-salon">Salon artisanal</span></div>
+          </div>
+          <div class="ev-action"><a href="#">Détails →</a></div>
+        </div>
+
+        <div class="event-row" data-type="gros">
+          <div class="ev-date">
+            <div class="day-range multi">27–30</div>
+            <div class="weekday">Jeu–Dim</div>
+          </div>
+          <div class="ev-body">
+            <div class="ev-name">Salon Indième — Exposition en gros</div>
+            <div class="ev-loc">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+              Toronto (ON)
+            </div>
+            <div class="ev-address">Exhibition Place, 100 Princes' Blvd, Toronto (ON) M6K 3C3</div>
+            <div class="ev-tags"><span class="ev-tag ev-tag-gros">Salon en gros</span></div>
+          </div>
+          <div class="ev-action"><a href="#">Détails →</a></div>
+        </div>
+      </div>
+    </div><!-- /year-group -->
+
+  </div>
+</section>
+
+<div class="blade"></div>
+
+<!-- NOTIFY -->
+<section class="notify-strip">
+  <div class="wrap">
+    <div class="notify-inner">
+      <div>
+        <h2>Ne manquez aucune date.</h2>
+        <p>Recevez les prochaines dates d'exposition directement par courriel.</p>
+      </div>
+      <div class="notify-form">
+        <input type="email" placeholder="votre@courriel.com" aria-label="Adresse courriel">
+        <button class="btn-amber">M'inscrire</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="padding:36px 48px 24px;">
+    <div class="foot-bottom">
+      <span>© 2026 Christophe Poly · Crono Design Inc.</span>
+      <div style="display:flex;gap:24px;">
+        <a href="index.html">Accueil</a>
+        <a href="bijoux.html">Bijoux</a>
+        <a href="espace-commercant.html">Espace commerçant</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+function filterEvents(type, btn){
+  document.querySelectorAll('.filter-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  const rows=document.querySelectorAll('.event-row');
+  let visible=0;
+  rows.forEach(r=>{
+    const show=type==='all'||r.dataset.type===type;
+    r.style.display=show?'':'none';
+    if(show)visible++;
+  });
+  // Show/hide month headers if all events hidden
+  document.querySelectorAll('.month-group').forEach(mg=>{
+    const hasVisible=[...mg.querySelectorAll('.event-row')].some(r=>r.style.display!=='none');
+    mg.style.display=hasVisible?'':'none';
+  });
+  document.getElementById('count').textContent=visible+' événement'+(visible>1?'s':'');
+}
+</script>
+</body>
+</html>

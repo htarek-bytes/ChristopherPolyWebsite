@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informations — Christophe Poly</title>
+<meta name="description" content="Matériaux, finitions, entretien et allergies des bijoux artisanaux Christophe Poly.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --amber: #D4920A; --amber-lt: #F5C842; --amber-pale: #FDF3D8;
+    --coal: #1E1C1A; --coal-soft: #45413C;
+    --paper: #FAF6EF; --paper-dk: #F0E9DC;
+    --mist: rgba(30, 28, 26, 0.52); --line: rgba(30, 28, 26, 0.10);
+    --r: 2px; --max: 1200px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--paper); color: var(--coal); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { text-decoration: none; color: inherit; }
+  h1, h2, h3, h4, .display { font-family: 'Cormorant Garant', serif; font-weight: 500; }
+  em { font-style: italic; }
+
+  /* ── SHARED HEADER ── */
+  header { position: sticky; top: 0; z-index: 100; background: var(--paper); height: 66px; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; }
+  .h-left { display: flex; flex-direction: column; }
+  .h-left .logo { font-family: 'Cormorant Garant', serif; font-weight: 600; font-size: 1.3rem; line-height: 1; }
+  .h-left .subline { font-family: 'Inter', sans-serif; font-weight: 500; text-transform: uppercase; font-size: 0.58rem; color: var(--mist); margin-top: 4px; letter-spacing: 0.05em; }
+  .h-center { display: flex; gap: 32px; }
+  .h-center a { font-size: 0.85rem; transition: color 0.2s; }
+  .h-center a:hover { color: var(--amber); }
+  .h-center a.active { color: var(--amber); font-weight: 600; }
+  .h-right { display: flex; align-items: center; gap: 16px; }
+  .btn-etsy, .btn-b2b { padding: 8px 16px; font-size: 0.8rem; font-weight: 500; border-radius: var(--r); transition: all 0.2s ease; }
+  .btn-etsy { background: var(--amber); color: #fff; }
+  .btn-etsy:hover { background: var(--amber-lt); transform: translateY(-1px); }
+  .btn-b2b { background: var(--coal); color: var(--paper); }
+  .btn-b2b:hover { background: var(--coal-soft); transform: translateY(-1px); }
+  .hamburger { display: none; background: none; border: none; font-size: 1.5rem; color: var(--coal); cursor: pointer; }
+
+  .breadcrumb { max-width: var(--max); margin: 30px auto 0; padding: 0 40px; font-size: 0.72rem; color: var(--mist); }
+
+  /* ── HERO ── */
+  .hero { max-width: var(--max); margin: 0 auto; padding: 70px 40px 90px; display: flex; justify-content: space-between; align-items: flex-end; gap: 60px; }
+  .hero-left .eyebrow { display: block; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: var(--amber); letter-spacing: 0.1em; margin-bottom: 20px; }
+  .hero-left h1 { font-size: clamp(2.6rem, 5vw, 4rem); line-height: 0.95; margin-bottom: 16px; }
+  .hero-left h1 em { color: var(--amber); }
+  .hero-right { max-width: 340px; padding-bottom: 8px; }
+  .hero-right p { color: var(--coal-soft); font-size: 1rem; }
+
+  /* ── STICKY TABS ── */
+  .tab-bar { position: sticky; top: 66px; z-index: 90; background: rgba(250, 246, 239, 0.95); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .tab-bar-inner { max-width: var(--max); margin: 0 auto; padding: 0 40px; display: flex; gap: 40px; overflow-x: auto; scrollbar-width: none; }
+  .tab-bar-inner::-webkit-scrollbar { display: none; }
+  .tab-bar a { padding: 20px 0; font-size: 0.9rem; font-weight: 500; color: var(--mist); border-bottom: 2px solid transparent; white-space: nowrap; transition: all 0.2s ease; }
+  .tab-bar a:hover { color: var(--coal); }
+  .tab-bar a.active { color: var(--coal); border-bottom-color: var(--amber); }
+
+  /* ── SECTION SHELL ── */
+  .info-section { max-width: var(--max); margin: 0 auto; padding: 110px 40px; scroll-margin-top: 130px; }
+  .blade { width: 100%; height: 3px; background: var(--amber); margin-bottom: 70px; }
+  .section-intro { max-width: 640px; margin-bottom: 70px; }
+  .section-intro .idx { font-family: 'Cormorant Garant', serif; font-style: italic; font-size: 1.1rem; color: var(--amber); display: block; margin-bottom: 10px; }
+  .section-intro h2 { font-size: clamp(2.2rem, 3.6vw, 3rem); margin-bottom: 18px; line-height: 1.08; }
+  .section-intro p { font-size: 1.05rem; color: var(--coal-soft); max-width: 560px; }
+
+  /* ── MATÉRIAUX — editorial rows, not cards ── */
+  .mat-rows { border-top: 1px solid var(--line); }
+  .mat-row { display: grid; grid-template-columns: 90px 1fr 1.3fr; gap: 40px; align-items: start; padding: 38px 0; border-bottom: 1px solid var(--line); transition: background .2s; }
+  .mat-row:hover { background: rgba(212,146,10,0.035); }
+  .mat-row .num { font-family: 'Cormorant Garant', serif; font-style: italic; font-size: 2.2rem; color: var(--amber); line-height: 1; }
+  .mat-row h3 { font-size: 1.5rem; }
+  .mat-row p { font-size: 0.98rem; color: var(--coal-soft); max-width: 480px; }
+
+  /* ── FINITIONS ── */
+  .finishes-wrapper { margin-top: 10px; }
+  .swatch-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 28px; margin-bottom: 70px; }
+  .swatch-item { text-align: left; }
+  .swatch-color { width: 100%; aspect-ratio: 1/1; border-radius: 50%; margin-bottom: 18px; border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 10px 24px rgba(30,28,26,0.12), inset 0 2px 4px rgba(255,255,255,0.25); }
+  .swatch-item .code { font-family: 'Cormorant Garant', serif; font-style: italic; font-size: 1.7rem; line-height: 1; display: block; margin-bottom: 4px; }
+  .swatch-item .name { font-size: 0.76rem; font-weight: 600; color: var(--mist); text-transform: uppercase; letter-spacing: 0.06em; }
+
+  .code-box { background: var(--coal); color: var(--paper); padding: 48px; border-radius: var(--r); display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: center; max-width: 900px; }
+  .code-box .cb-left h4 { font-family: 'Inter', sans-serif; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--amber-lt); margin-bottom: 10px; }
+  .code-box .example { font-family: 'Cormorant Garant', serif; font-size: 2.6rem; font-weight: 600; letter-spacing: 0.02em; white-space: nowrap; }
+  .code-box .cb-right p { font-size: 0.95rem; color: rgba(250,246,239,0.65); line-height: 1.8; }
+  .code-box .cb-right strong { color: var(--paper); font-weight: 600; }
+
+  /* ── ENTRETIEN ── */
+  .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 50px; }
+  .step-item { border-top: 1px solid var(--line); padding-top: 26px; }
+  .step-item .num { font-family: 'Cormorant Garant', serif; font-style: italic; font-size: 3.2rem; color: var(--amber); line-height: 1; display: block; margin-bottom: 18px; }
+  .step-item h3 { font-size: 1.15rem; margin-bottom: 10px; font-weight: 600; font-family: 'Inter', sans-serif; }
+  .step-item p { font-size: 0.95rem; color: var(--coal-soft); }
+
+  /* ── ALLERGIES — full width statement band ── */
+  .allergies-band { background: var(--paper-dk); border-radius: var(--r); padding: 70px 60px; display: grid; grid-template-columns: 1fr auto; gap: 50px; align-items: center; }
+  .allergies-band .quote { font-family: 'Cormorant Garant', serif; font-style: italic; font-size: 1.7rem; line-height: 1.4; color: var(--coal); max-width: 680px; }
+  .allergies-band .fine { font-size: 0.92rem; color: var(--coal-soft); margin-top: 20px; max-width: 640px; }
+  .allergies-band .go-mail { display: inline-flex; align-items: center; gap: 8px; background: var(--coal); color: var(--paper); padding: 15px 26px; font-size: 0.86rem; font-weight: 600; border-radius: var(--r); white-space: nowrap; transition: all .2s; }
+  .allergies-band .go-mail:hover { background: var(--coal-soft); transform: translateY(-1px); }
+
+  /* ── SHARED FOOTER ── */
+  footer { border-top: 3px solid var(--coal); background: var(--paper); padding: 80px 40px 30px; margin-top: 40px; }
+  .footer-grid { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; }
+  .f-brand .logo { font-family: 'Cormorant Garant', serif; font-size: 1.8rem; font-weight: 500; display: block; margin-bottom: 16px; }
+  .f-brand p { color: var(--mist); font-size: 0.9rem; max-width: 280px; margin-bottom: 24px; }
+  .f-col h4 { font-family: 'Inter', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mist); margin-bottom: 20px; }
+  .f-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .f-col a { font-size: 0.9rem; color: var(--coal); transition: color 0.2s; }
+  .f-col a:hover { color: var(--amber); }
+  .footer-bottom { max-width: var(--max); margin: 80px auto 0; padding-top: 24px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--mist); }
+
+  @media (max-width: 860px) {
+    .h-center, .h-right .btn-etsy, .h-right .btn-b2b { display: none; }
+    .hamburger { display: block; }
+    .hero { flex-direction: column; align-items: flex-start; gap: 30px; padding: 50px 20px 60px; }
+    .breadcrumb { padding: 0 20px; }
+    .tab-bar-inner { padding: 0 20px; gap: 24px; }
+    .info-section { padding: 60px 20px; }
+    .mat-row { grid-template-columns: 1fr; gap: 12px; }
+    .mat-row .num { font-size: 1.6rem; }
+    .swatch-row { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+    .code-box { grid-template-columns: 1fr; padding: 32px 24px; }
+    .steps-grid { grid-template-columns: 1fr; gap: 30px; }
+    .allergies-band { grid-template-columns: 1fr; padding: 40px 28px; text-align: left; }
+    .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+    .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="h-left">
+      <a href="index.html" class="logo">Christophe Poly</a>
+      <span class="subline">Bijoux artisanaux · Montréal</span>
+    </div>
+    <nav class="h-center">
+      <a href="a-propos.html">À propos</a>
+      <a href="bijoux.html">Bijoux</a>
+      <a href="informations.html" class="active">Informations</a>
+      <a href="expositions.html">Expositions</a>
+      <a href="ou-acheter.html">Où acheter</a>
+      <a href="a-propos.html#contact">Contact</a>
+    </nav>
+    <div class="h-right">
+      <a href="https://www.etsy.com/shop/ChristophePolyDesign" target="_blank" class="btn-etsy">Boutique Etsy</a>
+      <a href="espace-commercant.html" class="btn-b2b">Espace commerçant</a>
+      <button class="hamburger" aria-label="Menu">☰</button>
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">Accueil › Informations</div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-left">
+      <span class="eyebrow">Le savoir-faire</span>
+      <h1>Ce qu'il faut<br>savoir <em>avant<br>de porter.</em></h1>
+    </div>
+    <div class="hero-right">
+      <p>Matériaux, finitions, entretien et sensibilités cutanées — tout ce que Christophe Poly veut que vous sachiez sur vos bijoux.</p>
+    </div>
+  </section>
+
+  <!-- Sticky Tabs -->
+  <div class="tab-bar">
+    <div class="tab-bar-inner">
+      <a href="#materiaux" class="tab-link active">Matériaux</a>
+      <a href="#finitions" class="tab-link">Finitions</a>
+      <a href="#entretien" class="tab-link">Entretien</a>
+      <a href="#allergies" class="tab-link">Allergies</a>
+    </div>
+  </div>
+
+  <!-- Matériaux -->
+  <section id="materiaux" class="info-section scroll-spy">
+    <div class="section-intro">
+      <span class="idx">01 — Matériaux</span>
+      <h2>Des matériaux choisis pour leur volume.</h2>
+      <p>Chaque bijou Christophe Poly est fabriqué à partir de matériaux sélectionnés pour leur qualité architecturale, leur poids en main et leur tenue dans le temps.</p>
+    </div>
+    <div class="mat-rows">
+      <div class="mat-row">
+        <span class="num">i</span>
+        <h3>Aluminium</h3>
+        <p>Léger et résistant à la corrosion. Anodisé pour la couleur ou brossé pour une texture brute et moderne.</p>
+      </div>
+      <div class="mat-row">
+        <span class="num">ii</span>
+        <h3>Laiton</h3>
+        <p>Un métal chaleureux et malléable qui développe, avec le temps et le soin, une patine unique et noble.</p>
+      </div>
+      <div class="mat-row">
+        <span class="num">iii</span>
+        <h3>Acrylique</h3>
+        <p>Translucide ou opaque, il apporte des touches de couleur vive et de lumière tout en restant ultra-léger.</p>
+      </div>
+      <div class="mat-row">
+        <span class="num">iv</span>
+        <h3>Cuir</h3>
+        <p>Sélectionné pour sa souplesse et sa durabilité, utilisé principalement comme cordon structurel pour les colliers.</p>
+      </div>
+      <div class="mat-row">
+        <span class="num">v</span>
+        <h3>Caoutchouc</h3>
+        <p>Offre flexibilité, confort absolu sur la peau et une résistance exceptionnelle à l'usure quotidienne.</p>
+      </div>
+      <div class="mat-row">
+        <span class="num">vi</span>
+        <h3>Fils &amp; crochets</h3>
+        <p>Composants en contact direct avec la peau. Options hypoallergéniques — acier chirurgical, sans nickel — disponibles.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Finitions -->
+  <section id="finitions" class="info-section scroll-spy">
+    <div class="blade"></div>
+    <div class="section-intro">
+      <span class="idx">02 — Finitions</span>
+      <h2>Les cinq finitions.</h2>
+      <p>Chaque pièce en métal est traitée à la main dans l'atelier pour obtenir sa texture finale, puis scellée avec un vernis protecteur de haute qualité.</p>
+    </div>
+
+    <div class="finishes-wrapper">
+      <div class="swatch-row">
+        <div class="swatch-item">
+          <div class="swatch-color" style="background: linear-gradient(135deg, #705E49, #4A3E2F);"></div>
+          <span class="code">M</span><span class="name">Antique</span>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch-color" style="background: linear-gradient(135deg, #D4AF37, #B49017);"></div>
+          <span class="code">T</span><span class="name">Or</span>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch-color" style="background: linear-gradient(135deg, #333333, #111111);"></div>
+          <span class="code">G</span><span class="name">Noir</span>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch-color" style="background: linear-gradient(135deg, #E0E0E0, #A0A0A0);"></div>
+          <span class="code">A</span><span class="name">Argent brillant</span>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch-color" style="background: linear-gradient(135deg, #C5A059, #9F7E41);"></div>
+          <span class="code">D</span><span class="name">Or mat</span>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="cb-left">
+          <h4>Décrypter la nomenclature</h4>
+          <div class="example">AU101TA</div>
+        </div>
+        <div class="cb-right">
+          <p><strong>AU</strong> — Matériau principal (Aluminium) &nbsp;·&nbsp; <strong>101</strong> — Numéro de modèle &nbsp;·&nbsp; <strong>T</strong> — Finition principale (Or) &nbsp;·&nbsp; <strong>A</strong> — Finition d'accent (Argent brillant)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Entretien -->
+  <section id="entretien" class="info-section scroll-spy">
+    <div class="blade"></div>
+    <div class="section-intro">
+      <span class="idx">03 — Entretien</span>
+      <h2>Entretien et longévité.</h2>
+      <p>L'approche sculpturale des bijoux Christophe Poly requiert un entretien minime, mais essentiel, pour préserver les finis appliqués à la main.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-item">
+        <span class="num">1</span>
+        <h3>Évitez l'eau et les produits chimiques</h3>
+        <p>Le parfum, la laque pour cheveux et l'eau savonneuse peuvent altérer le vernis protecteur des métaux au fil du temps.</p>
+      </div>
+      <div class="step-item">
+        <span class="num">2</span>
+        <h3>Nettoyez avec un linge doux</h3>
+        <p>Utilisez un chiffon sec, type microfibre, pour raviver l'éclat — ou très légèrement humide pour les parties en acrylique.</p>
+      </div>
+      <div class="step-item">
+        <span class="num">3</span>
+        <h3>Retirez-les en mouvement</h3>
+        <p>Pour éviter les déformations des structures en fil et les chocs sur l'acrylique, retirez vos bijoux lors d'activités physiques intenses.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Allergies -->
+  <section id="allergies" class="info-section scroll-spy">
+    <div class="blade"></div>
+    <div class="section-intro">
+      <span class="idx">04 — Allergies</span>
+      <h2>Hypoallergénique.</h2>
+    </div>
+    <div class="allergies-band">
+      <div>
+        <p class="quote">« Nous prêtons une attention particulière aux composants en contact direct avec la peau — tiges, papillons, crochets et chaînes. »</p>
+        <p class="fine">Nos apprêts métalliques respectent les normes les plus strictes : aucun ajout de nickel ni de plomb. Contactez-nous si vous avez des sensibilités particulières.</p>
+      </div>
+      <a href="mailto:info@christophepoly.com" class="go-mail">
+        info@christophepoly.com
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="f-brand">
+        <span class="logo">Christophe Poly</span>
+        <p>Bijoux d'art fait main à Montréal, depuis plus de 30 ans. Membre du CMAQ.</p>
+        <div style="display:flex; gap:16px;">
+          <a href="#" aria-label="Facebook"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+          <a href="https://www.etsy.com/shop/ChristophePolyDesign" target="_blank" aria-label="Etsy"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg></a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h4>Explorer</h4>
+        <ul>
+          <li><a href="a-propos.html">À propos</a></li>
+          <li><a href="bijoux.html">Bijoux</a></li>
+          <li><a href="expositions.html">Expositions</a></li>
+          <li><a href="informations.html">Informations</a></li>
+          <li><a href="ou-acheter.html">Où acheter</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Acheter</h4>
+        <ul>
+          <li><a href="https://www.etsy.com/shop/ChristophePolyDesign" target="_blank">Boutique Etsy</a></li>
+          <li><a href="espace-commercant.html">Espace commerçant</a></li>
+          <li><a href="ou-acheter.html">Localisateur</a></li>
+          <li><a href="expositions.html">Salons</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:info@christophepoly.com">info@christophepoly.com</a></li>
+          <li><a href="tel:5142789246">514 278-9246</a></li>
+          <li><a href="ou-acheter.html">6044 St-Hubert Mtl</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Christophe Poly · Crono Design Inc.</span>
+      <span>Membre du Conseil des métiers d'art du Québec</span>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const sections = document.querySelectorAll(".scroll-spy");
+      const tabLinks = document.querySelectorAll(".tab-link");
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute("id");
+            tabLinks.forEach(link => {
+              link.classList.remove("active");
+              if (link.getAttribute("href") === "#" + id) {
+                link.classList.add("active");
+                link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+              }
+            });
+          }
+        });
+      }, { rootMargin: "-140px 0px -60% 0px" });
+      sections.forEach(sec => observer.observe(sec));
+    });
+  </script>
+</body>
+</html>

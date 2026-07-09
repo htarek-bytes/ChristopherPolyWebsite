@@ -17,106 +17,159 @@
     --paper-dark: #F0EBE0;
     --line: rgba(42,42,40,0.12);
     --ink-soft: rgba(42,42,40,0.62);
-    --radius: 2px;
+    --radius: 8px;
+    --max: 1180px;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
   body{
     font-family:'Inter',sans-serif;
     background:var(--paper); color:var(--charcoal);
     line-height:1.5; -webkit-font-smoothing:antialiased;
   }
   a{color:inherit; text-decoration:none;}
-  .wrap{max-width:1180px; margin:0 auto; padding:0 40px;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 40px;}
+  h1,h2,h3{font-family:'Fraunces',serif; font-weight:500;}
 
-  /* Portal header — visually distinct from public site, signals "you're inside" */
-  .portal-header{
-    background:var(--charcoal); color:var(--paper);
-    padding:22px 0;
-  }
-  .portal-header .wrap{display:flex; align-items:center; justify-content:space-between;}
-  .ph-logo{font-family:'Fraunces',serif; font-size:1.2rem; font-weight:500;}
+  /* ── Portal header — signals "you're inside" ── */
+  .portal-header{background:var(--charcoal); color:var(--paper); padding:20px 0;}
+  .portal-header .wrap{display:flex; align-items:center; justify-content:space-between; gap:20px;}
+  .ph-left{display:flex; align-items:center; gap:18px;}
+  .ph-logo{font-family:'Fraunces',serif; font-size:1.15rem; font-weight:500;}
   .ph-badge{
-    display:flex; align-items:center; gap:8px;
-    font-size:0.74rem; font-weight:500; color:rgba(250,247,241,0.55);
+    display:flex; align-items:center; gap:7px;
+    font-size:0.72rem; font-weight:500; color:rgba(250,247,241,0.5);
+    padding-left:18px; border-left:1px solid rgba(250,247,241,0.15);
   }
-  .ph-badge .dot{width:6px; height:6px; border-radius:50%; background:var(--yellow);}
-  .ph-actions{display:flex; align-items:center; gap:22px;}
-  .ph-actions a{font-size:0.82rem; color:rgba(250,247,241,0.7);}
+  .ph-badge .dot{width:6px; height:6px; border-radius:50%; background:var(--yellow); flex-shrink:0;}
+  .ph-actions{display:flex; align-items:center; gap:24px;}
+  .ph-actions a{font-size:0.8rem; color:rgba(250,247,241,0.68); transition:color 0.2s;}
   .ph-actions a:hover{color:var(--paper);}
 
-  .portal-intro{padding:56px 0 40px; border-bottom:1px solid var(--line);}
-  .portal-intro h1{
-    font-family:'Fraunces',serif; font-weight:500;
-    font-size:clamp(1.7rem, 2.6vw, 2.2rem); margin-bottom:12px;
-  }
-  .portal-intro p{color:var(--ink-soft); font-size:0.96rem; max-width:560px;}
+  .breadcrumb{font-size:0.74rem; color:var(--ink-soft); padding:18px 0 0;}
+  .breadcrumb a:hover{color:var(--charcoal);}
 
-  .portal-grid{padding:56px 0 100px;}
+  /* ── Intro ── */
+  .portal-intro{padding:40px 0 44px; border-bottom:1px solid var(--line);}
+  .portal-intro .rule{width:46px; height:3px; background:var(--yellow); border-radius:2px; margin-bottom:18px;}
+  .portal-intro h1{font-size:clamp(1.7rem, 2.6vw, 2.2rem); margin-bottom:10px;}
+  .portal-intro p{color:var(--ink-soft); font-size:0.96rem; max-width:540px;}
+
+  /* ── Section labels ── */
   .pg-label{
     font-size:0.72rem; font-weight:600; letter-spacing:0.1em;
-    text-transform:uppercase; color:var(--ink-soft);
-    margin-bottom:24px; display:block;
+    text-transform:uppercase; color:var(--charcoal);
+    margin-bottom:22px; display:flex; align-items:center; gap:8px;
   }
-  .cards{
-    display:grid; grid-template-columns:repeat(4, 1fr); gap:18px;
-    margin-bottom:54px;
-  }
-  .pcard{
-    background:var(--paper); border:1px solid var(--line);
-    border-radius:var(--radius); padding:28px 24px;
-    display:flex; flex-direction:column; gap:16px;
-    transition:border-color 0.2s ease, transform 0.2s ease;
-  }
-  .pcard:hover{border-color:var(--charcoal); transform:translateY(-2px);}
-  .pcard .ic{
-    width:40px; height:40px; border-radius:50%;
-    background:var(--paper-dark); display:flex; align-items:center; justify-content:center;
-  }
-  .pcard .ic svg{width:19px; height:19px; stroke:var(--charcoal);}
-  .pcard h3{font-size:0.98rem; font-weight:500;}
-  .pcard p{font-size:0.84rem; color:var(--ink-soft); flex:1;}
-  .pcard .action{
-    font-size:0.78rem; font-weight:600;
-    display:flex; align-items:center; gap:6px;
-    padding-top:14px; border-top:1px solid var(--line);
-  }
-  .pcard .action svg{width:13px; height:13px;}
-  .pcard.featured{background:var(--charcoal); border-color:var(--charcoal); color:var(--paper);}
-  .pcard.featured .ic{background:rgba(250,247,241,0.1);}
-  .pcard.featured .ic svg{stroke:var(--yellow);}
-  .pcard.featured p{color:rgba(250,247,241,0.6);}
-  .pcard.featured .action{color:var(--yellow); border-top-color:rgba(250,247,241,0.15);}
+  .pg-label::before{content:""; width:14px; height:3px; border-radius:2px; background:var(--yellow); display:inline-block;}
 
-  /* Marketplace row — visually separated since these are external links */
-  .marketplace{
-    display:grid; grid-template-columns:1fr 1fr; gap:18px;
+  /* ── Document list — clean rows, not busy cards ── */
+  .doc-section{padding:52px 0 20px;}
+  .doc-list{border-top:1px solid var(--line);}
+  .doc-row{
+    display:grid; grid-template-columns:44px 1fr auto; align-items:center;
+    gap:24px; padding:22px 4px; border-bottom:1px solid var(--line);
+    transition:background 0.15s ease;
   }
+  .doc-row{position:relative;}
+  .doc-row::before{content:""; position:absolute; left:-16px; top:0; bottom:0; width:3px; background:var(--yellow); border-radius:2px; opacity:0; transition:opacity 0.15s ease;}
+  .doc-row:hover{background:rgba(244,193,0,0.045);}
+  .doc-row:hover::before{opacity:1;}
+  .doc-row .ic{
+    width:44px; height:44px; border-radius:50%; flex-shrink:0;
+    background:var(--paper-dark); display:flex; align-items:center; justify-content:center;
+    transition:background 0.15s ease;
+  }
+  .doc-row:hover .ic{background:var(--yellow);}
+  .doc-row .ic svg{width:19px; height:19px; stroke:var(--charcoal);}
+  .doc-row .info h3{font-family:'Inter',sans-serif; font-size:0.95rem; font-weight:600; margin-bottom:3px;}
+  .doc-row .info p{font-size:0.84rem; color:var(--ink-soft);}
+  .doc-row .actions{display:flex; align-items:center; gap:10px; flex-shrink:0;}
+  .btn-ghost, .btn-solid{
+    display:inline-flex; align-items:center; gap:7px;
+    font-size:0.8rem; font-weight:600; padding:10px 18px;
+    border-radius:999px; border:1px solid var(--line);
+    white-space:nowrap; cursor:pointer; transition:all 0.15s ease;
+    background:transparent; color:var(--charcoal);
+  }
+  .btn-ghost svg{width:14px; height:14px;}
+  .btn-ghost:hover{border-color:var(--charcoal);}
+  .btn-solid{background:var(--yellow); color:var(--charcoal); border-color:var(--yellow);}
+  .btn-solid:hover{background:var(--yellow-deep); border-color:var(--yellow-deep);}
+
+  /* ── Marketplace ── */
+  .marketplace-section{padding:16px 0 90px;}
+  .marketplace{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
   .mcard{
     background:var(--paper-dark); border-radius:var(--radius);
-    padding:30px 28px; display:flex; align-items:center; justify-content:space-between;
+    padding:26px 26px; display:flex; align-items:center; justify-content:space-between;
     gap:20px;
   }
-  .mcard .info h3{font-size:1rem; font-weight:500; margin-bottom:5px;}
+  .mcard .info h3{font-family:'Inter',sans-serif; font-size:0.95rem; font-weight:600; margin-bottom:4px;}
   .mcard .info p{font-size:0.82rem; color:var(--ink-soft);}
   .mcard .go{
     flex-shrink:0; background:var(--charcoal); color:var(--paper);
-    padding:11px 20px; font-size:0.8rem; font-weight:500;
-    border-radius:var(--radius); white-space:nowrap;
+    padding:11px 22px; font-size:0.8rem; font-weight:600;
+    border-radius:999px; white-space:nowrap; transition:background 0.15s;
   }
   .mcard .go:hover{background:var(--charcoal-soft);}
 
-  footer{padding:40px 0; border-top:1px solid var(--line); text-align:center;}
+  footer{padding:36px 0; border-top:1px solid var(--line); text-align:center;}
   footer p{font-size:0.78rem; color:var(--ink-soft);}
+
+  /* ── PDF preview modal ── */
+  .pdf-modal{
+    position:fixed; inset:0; z-index:1000;
+    background:rgba(20,19,17,0.72);
+    display:flex; align-items:center; justify-content:center;
+    padding:32px; opacity:0; visibility:hidden;
+    transition:opacity 0.2s ease;
+  }
+  .pdf-modal.open{opacity:1; visibility:visible;}
+  .pdf-modal-inner{
+    background:var(--paper); width:100%; max-width:880px; height:100%; max-height:820px;
+    border-radius:14px; overflow:hidden; display:flex; flex-direction:column;
+    box-shadow:0 30px 80px rgba(0,0,0,0.35);
+    transform:translateY(10px); transition:transform 0.2s ease;
+  }
+  .pdf-modal.open .pdf-modal-inner{transform:translateY(0);}
+  .pdf-modal-header{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 22px; border-bottom:1px solid var(--line); background:var(--paper);
+  }
+  .pdf-modal-header h3{font-family:'Inter',sans-serif; font-size:0.92rem; font-weight:600;}
+  .pdf-modal-header .pmh-actions{display:flex; align-items:center; gap:10px;}
+  .pdf-modal-header .pmh-actions a{
+    font-size:0.8rem; font-weight:600; color:var(--charcoal);
+    padding:8px 16px; background:var(--yellow); border:1px solid var(--yellow); border-radius:999px;
+    display:inline-flex; align-items:center; gap:6px; transition:background 0.15s, border-color 0.15s;
+  }
+  .pdf-modal-header .pmh-actions a:hover{background:var(--yellow-deep); border-color:var(--yellow-deep);}
+  .pdf-modal-close{
+    width:32px; height:32px; border-radius:50%; border:none; background:var(--paper-dark);
+    display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0;
+  }
+  .pdf-modal-close svg{width:15px; height:15px; stroke:var(--charcoal);}
+  .pdf-modal-close:hover{background:var(--line);}
+  .pdf-modal-body{flex:1; background:var(--paper-dark); position:relative;}
+  .pdf-modal-body iframe{width:100%; height:100%; border:none; display:block;}
+  .pdf-modal-empty{
+    position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:10px; padding:40px; text-align:center; color:var(--ink-soft); font-size:0.86rem;
+  }
 
   @media (max-width:980px){
     .wrap{padding-left:24px; padding-right:24px;}
-    .cards{grid-template-columns:1fr 1fr;}
     .marketplace{grid-template-columns:1fr;}
-    .portal-header .wrap{flex-wrap:wrap; gap:14px;}
+    .portal-header .wrap{flex-wrap:wrap; gap:12px;}
+    .ph-badge{display:none;}
+    .doc-row{grid-template-columns:40px 1fr; row-gap:14px;}
+    .doc-row .actions{grid-column:1 / -1;}
   }
   @media (max-width:560px){
-    .cards{grid-template-columns:1fr;}
     .mcard{flex-direction:column; align-items:flex-start;}
+    .pdf-modal{padding:0;}
+    .pdf-modal-inner{max-width:none; max-height:none; border-radius:0;}
   }
 </style>
 </head>
@@ -124,72 +177,111 @@
 
 <div class="portal-header">
   <div class="wrap">
-    <a href="index.html" class="ph-logo">Christophe Poly</a>
-    <div class="ph-badge"><span class="dot"></span>Espace commerçant — accès actif</div>
+    <div class="ph-left">
+      <a href="index.html" class="ph-logo">Christophe Poly</a>
+      <div class="ph-badge"><span class="dot"></span>Espace commerçant — accès actif</div>
+    </div>
     <div class="ph-actions">
-      <a href="portail-interne-en.html">EN</a>
       <a href="mailto:info@christophepoly.com">Contacter l'atelier</a>
       <a href="espace-commercant.html">Quitter l'espace</a>
     </div>
   </div>
 </div>
 
+<div class="wrap">
+  <div class="breadcrumb"><a href="index.html">Accueil</a> / <a href="espace-commercant.html">Espace commerçant</a> / Portail</div>
+</div>
+
 <section class="portal-intro">
   <div class="wrap">
+    <div class="rule"></div>
     <h1>Bienvenue dans l'espace commerçant.</h1>
     <p>Catalogue, formulaires et outils de commande — tout ce qu'il vous faut pour présenter et vendre la collection Christophe Poly en boutique.</p>
   </div>
 </section>
 
-<section class="portal-grid">
+<section class="doc-section">
   <div class="wrap">
     <span class="pg-label">Documents &amp; ressources</span>
-    <div class="cards">
+    <div class="doc-list">
 
-      <a href="#" class="pcard featured">
+      <div class="doc-row" data-pdf="pdfs/CATA.FR_.26.2.pdf" data-title="Catalogue complet">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 4h16v16H4z"/><path d="M4 9h16"/><path d="M9 4v16"/></svg></div>
-        <h3>Catalogue complet</h3>
-        <p>L'ensemble des collections avec prix de gros. Mis à jour à chaque saison.</p>
-        <span class="action">Télécharger le PDF <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></span>
-      </a>
+        <div class="info">
+          <h3>Catalogue complet</h3>
+          <p>L'ensemble des collections avec prix de gros. Mis à jour à chaque saison.</p>
+        </div>
+        <div class="actions">
+          <button class="btn-ghost preview-btn">Aperçu <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></button>
+          <a href="pdfs/catalogue-complet.pdf" download class="btn-solid">Télécharger <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+        </div>
+      </div>
 
-      <a href="#" class="pcard">
+      <div class="doc-row" data-pdf="pdfs/formulaires-commande.pdf" data-title="Formulaires de commande">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M9 11l3 3 8-8"/><path d="M21 12a9 9 0 1 1-9-9"/></svg></div>
-        <h3>Formulaires de commande</h3>
-        <p>Documents à remplir pour passer vos commandes directement avec l'atelier.</p>
-        <span class="action">Télécharger le PDF <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></span>
-      </a>
+        <div class="info">
+          <h3>Formulaires de commande</h3>
+          <p>Documents à remplir pour passer vos commandes directement avec l'atelier.</p>
+        </div>
+        <div class="actions">
+          <button class="btn-ghost preview-btn">Aperçu <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></button>
+          <a href="pdfs/formulaires-commande.pdf" download class="btn-solid">Télécharger <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+        </div>
+      </div>
 
-      <a href="#" class="pcard">
+      <div class="doc-row" data-pdf="pdfs/presentoirs.pdf" data-title="Présentoirs expliqués">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18"/><circle cx="8" cy="14" r="1.5"/><circle cx="14" cy="14" r="1.5"/></svg></div>
-        <h3>Présentoirs expliqués</h3>
-        <p>Guide complet pour la mise en valeur de la collection en vitrine et comptoir.</p>
-        <span class="action">Télécharger le PDF <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></span>
-      </a>
+        <div class="info">
+          <h3>Présentoirs expliqués</h3>
+          <p>Guide complet pour la mise en valeur de la collection en vitrine et comptoir.</p>
+        </div>
+        <div class="actions">
+          <button class="btn-ghost preview-btn">Aperçu <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></button>
+          <a href="pdfs/03b_DisplaysLarge_25-2_FR.pdf" download class="btn-solid">Télécharger <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+        </div>
+      </div>
 
-      <a href="#" class="pcard">
+      <div class="doc-row" data-pdf="pdfs/02.Codes_.26.2.FR_.pdf" data-title="Codes expliqués">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 6h16M4 12h16M4 18h7"/></svg></div>
-        <h3>Codes expliqués</h3>
-        <p>Légende des codes produit — finis, couleurs, formats. Ex. AU101TA.</p>
-        <span class="action">Télécharger le PDF <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></span>
-      </a>
+        <div class="info">
+          <h3>Codes expliqués</h3>
+          <p>Légende des codes produit — finis, couleurs, formats. Ex. AU101TA.</p>
+        </div>
+        <div class="actions">
+          <button class="btn-ghost preview-btn">Aperçu <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></button>
+          <a href="pdfs/codes-expliques.pdf" download class="btn-solid">Télécharger <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+        </div>
+      </div>
 
-      <a href="#" class="pcard">
+      <div class="doc-row" data-pdf="pdfs/pourquoi-christophe-poly.pdf" data-title="Pourquoi Christophe Poly">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
-        <h3>Pourquoi Christophe Poly</h3>
-        <p>L'argumentaire de vente — l'histoire de l'atelier à partager avec vos clientes.</p>
-        <span class="action">Télécharger le PDF <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></span>
-      </a>
+        <div class="info">
+          <h3>Pourquoi Christophe Poly</h3>
+          <p>L'argumentaire de vente — l'histoire de l'atelier à partager avec vos clientes.</p>
+        </div>
+        <div class="actions">
+          <button class="btn-ghost preview-btn">Aperçu <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></button>
+          <a href="pdfs/pourquoi-christophe-poly.pdf" download class="btn-solid">Télécharger <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+        </div>
+      </div>
 
-      <a href="#" class="pcard">
+      <div class="doc-row">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="4" width="18" height="17" rx="1"/><path d="M3 9h18M8 3v3M16 3v3"/></svg></div>
-        <h3>Calendrier des expositions</h3>
-        <p>Dates des salons et expositions où découvrir la collection en gros.</p>
-        <span class="action">Voir le calendrier <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
+        <div class="info">
+          <h3>Calendrier des expositions</h3>
+          <p>Dates des salons et expositions où découvrir la collection en gros.</p>
+        </div>
+        <div class="actions">
+          <a href="expositions.html" class="btn-solid">Voir le calendrier <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
 
     </div>
+  </div>
+</section>
 
+<section class="marketplace-section">
+  <div class="wrap">
     <span class="pg-label">Commander en ligne</span>
     <div class="marketplace">
       <div class="mcard">
@@ -215,6 +307,81 @@
     <p>© 2026 Christophe Poly · Crono Design Inc. · Espace commerçant</p>
   </div>
 </footer>
+
+<!-- PDF preview modal -->
+<div class="pdf-modal" id="pdfModal">
+  <div class="pdf-modal-inner">
+    <div class="pdf-modal-header">
+      <h3 id="pdfModalTitle">Document</h3>
+      <div class="pmh-actions">
+        <a id="pdfModalDownload" href="#" download>Télécharger <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+        <button class="pdf-modal-close" id="pdfModalClose" aria-label="Fermer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="pdf-modal-body" id="pdfModalBody">
+      <iframe id="pdfFrame" src="" title="Aperçu du document"></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    const modal = document.getElementById('pdfModal');
+    const frame = document.getElementById('pdfFrame');
+    const body = document.getElementById('pdfModalBody');
+    const titleEl = document.getElementById('pdfModalTitle');
+    const downloadLink = document.getElementById('pdfModalDownload');
+    const closeBtn = document.getElementById('pdfModalClose');
+
+    function openModal(url, title){
+      titleEl.textContent = title || 'Document';
+      downloadLink.href = url;
+
+      const existingEmpty = body.querySelector('.pdf-modal-empty');
+      if (existingEmpty) existingEmpty.remove();
+
+      fetch(url, { method: 'HEAD' }).then(res => {
+        if (res.ok) {
+          frame.style.display = 'block';
+          frame.src = url;
+        } else {
+          showEmptyState();
+        }
+      }).catch(() => showEmptyState());
+
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function showEmptyState(){
+      frame.style.display = 'none';
+      frame.src = '';
+      const empty = document.createElement('div');
+      empty.className = 'pdf-modal-empty';
+      empty.innerHTML = '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16v16H4z"/><path d="M4 9h16"/><path d="M9 4v16"/></svg><span>Aperçu indisponible pour le moment.<br>Utilisez le bouton téléchargement ci-dessus.</span>';
+      body.appendChild(empty);
+    }
+
+    function closeModal(){
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+      frame.src = '';
+    }
+
+    document.querySelectorAll('.preview-btn').forEach(btn => {
+      btn.addEventListener('click', function(){
+        const row = this.closest('.doc-row');
+        openModal(row.dataset.pdf, row.dataset.title);
+      });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e){ if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeModal(); });
+  })();
+</script>
 
 </body>
 </html>

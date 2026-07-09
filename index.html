@@ -3,738 +3,693 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Christophe Poly — Bijoux d'art fait main à Montréal</title>
+<title>Christophe Poly — Bijoux artisanaux, Montréal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --yellow: #F4C100;
-    --yellow-deep: #D9A800;
-    --charcoal: #2A2A28;
-    --charcoal-soft: #45433F;
-    --paper: #FAF7F1;
-    --paper-dark: #F0EBE0;
-    --line: rgba(42,42,40,0.12);
-    --ink-soft: rgba(42,42,40,0.62);
-    --radius: 2px;
-  }
+/* ── TOKENS ── */
+:root{
+  --amber:#D4920A; --amber-lt:#F5C842; --amber-pale:#FDF3D8;
+  --coal:#1E1C1A;  --coal-soft:#45413C;
+  --paper:#FAF6EF; --paper-dk:#F0E9DC;
+  --mist:rgba(30,28,26,.52); --line:rgba(30,28,26,.10);
+  --r:2px; --max:1200px;
+}
+/* ── RESET ── */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--paper);color:var(--coal);line-height:1.6;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 48px;}
 
-  *{margin:0;padding:0;box-sizing:border-box;}
+/* ── TYPOGRAPHY ── */
+.display{font-family:'Cormorant Garant',serif;font-weight:500;line-height:1.05;letter-spacing:-.01em;}
+.display-lg{font-size:clamp(3rem,5.5vw,5.2rem);}
+.display-md{font-size:clamp(2rem,3.2vw,3rem);}
+.display-sm{font-size:clamp(1.5rem,2.4vw,2.1rem);}
+.label{font-size:.68rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--mist);}
+.label-amber{color:var(--amber);}
+body p{color:var(--mist);font-size:.96rem;}
 
-  html{scroll-behavior:smooth;}
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;font-size:.8rem;font-weight:600;letter-spacing:.04em;border-radius:var(--r);transition:all .2s ease;cursor:pointer;border:none;}
+.btn-coal{background:var(--coal);color:var(--paper);}
+.btn-coal:hover{background:var(--coal-soft);transform:translateY(-1px);}
+.btn-amber{background:var(--amber);color:var(--paper);}
+.btn-amber:hover{background:#B87E08;transform:translateY(-1px);}
+.btn-ghost{background:transparent;color:var(--coal);border:1px solid var(--coal);padding:11px 23px;}
+.btn-ghost:hover{background:var(--coal);color:var(--paper);}
 
-  body{
-    font-family:'Inter',sans-serif;
-    background:var(--paper);
-    color:var(--charcoal);
-    line-height:1.5;
-    -webkit-font-smoothing:antialiased;
-  }
+/* ── BLADE DIVIDER (signature element) ── */
+.blade{height:3px;background:var(--amber);width:100%;}
+.blade-thin{height:1px;background:var(--line);}
 
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
-  }
+/* ── HEADER ── */
+.site-header{position:sticky;top:0;z-index:100;background:var(--paper);border-bottom:1px solid var(--line);}
+.hbar{display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:66px;max-width:var(--max);margin:0 auto;}
+.hlogo{font-family:'Cormorant Garant',serif;font-size:1.35rem;font-weight:600;letter-spacing:.02em;line-height:1.1;}
+.hlogo small{display:block;font-family:'Inter',sans-serif;font-size:.58rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--mist);margin-top:2px;}
+.hnav{display:flex;gap:2px;list-style:none;align-items:center;}
+.hnav > li{position:relative;}
+.hnav > li > a{font-size:.78rem;font-weight:500;padding:8px 12px;border-radius:var(--r);display:flex;align-items:center;gap:3px;transition:background .15s;white-space:nowrap;}
+.hnav > li > a:hover,.hnav > li:hover > a{background:var(--paper-dk);}
+.hnav > li > a .caret{font-size:.55rem;opacity:.45;margin-top:1px;}
+/* dropdown */
+.sub{position:absolute;top:calc(100% + 6px);left:0;background:var(--paper);border:1px solid var(--line);border-radius:4px;min-width:190px;box-shadow:0 6px 20px rgba(0,0,0,.07);opacity:0;pointer-events:none;transform:translateY(4px);transition:all .15s ease;z-index:200;}
+.hnav > li:hover .sub{opacity:1;pointer-events:auto;transform:none;}
+.sub li{list-style:none;}
+.sub a{display:block;padding:9px 16px;font-size:.78rem;transition:background .12s;}
+.sub a:hover{background:var(--paper-dk);}
+/* right side */
+.hright{display:flex;align-items:center;gap:8px;}
+.lang-toggle{font-size:.72rem;font-weight:600;letter-spacing:.08em;color:var(--mist);padding:6px 8px;border-radius:var(--r);transition:color .15s;}
+.lang-toggle:hover{color:var(--coal);}
+.hright .btn{font-size:.72rem;padding:9px 16px;}
+/* mobile */
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px;}
+.hamburger svg{width:20px;height:20px;}
 
-  a{color:inherit; text-decoration:none;}
-  img{max-width:100%; display:block;}
+/* ── HERO ── */
+.hero{padding:100px 0 0;overflow:hidden;}
+.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.hero-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:24px;}
+.hero-eyebrow::after{content:'';flex:1;max-width:60px;height:1px;background:var(--amber);}
+.hero h1{margin-bottom:20px;}
+.hero h1 em{font-style:italic;color:var(--amber);}
+.hero .sub-copy{max-width:420px;margin-bottom:36px;font-size:1rem;}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
 
-  .wrap{max-width:1240px; margin:0 auto; padding:0 40px;}
+/* Hero visual — editorial product composition */
+.hero-visual{position:relative;aspect-ratio:4/5;}
+.hero-img-main{
+  width:100%;height:100%;object-fit:cover;border-radius:var(--r);
+  background:var(--paper-dk);
+}
+.hero-img-placeholder{
+  width:100%;height:100%;background:var(--paper-dk);border-radius:var(--r);
+  display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;
+}
+.hero-caption{
+  position:absolute;bottom:20px;left:20px;
+  background:rgba(250,246,239,.93);backdrop-filter:blur(6px);
+  padding:8px 14px;font-size:.68rem;font-weight:500;letter-spacing:.04em;
+  border-radius:var(--r);
+}
+/* Materials ribbon */
+.mat-ribbon{margin-top:80px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.mat-ribbon ul{display:flex;justify-content:space-between;list-style:none;padding:16px 0;}
+.mat-ribbon li{font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);}
 
-  /* ---------- HEADER ---------- */
-  header{
-    position:sticky; top:0; z-index:100;
-    background:var(--paper);
-    border-bottom:1px solid var(--line);
-  }
-  .header-inner{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:22px 40px;
-    max-width:1240px; margin:0 auto;
-  }
-  .logo{
-    font-family:'Fraunces',serif;
-    font-size:1.5rem;
-    font-weight:500;
-    letter-spacing:0.01em;
-  }
-  .logo span{
-    display:block;
-    font-family:'Inter',sans-serif;
-    font-size:0.62rem;
-    font-weight:500;
-    letter-spacing:0.16em;
-    text-transform:uppercase;
-    color:var(--ink-soft);
-    margin-top:3px;
-  }
-  nav ul{
-    display:flex; gap:38px; list-style:none;
-  }
-  nav a{
-    font-size:0.85rem;
-    font-weight:500;
-    position:relative;
-    padding-bottom:4px;
-  }
-  nav a::after{
-    content:'';
-    position:absolute; left:0; bottom:0;
-    width:0; height:1px;
-    background:var(--charcoal);
-    transition:width 0.25s ease;
-  }
-  nav a:hover::after{width:100%;}
+/* ── ABOUT ── */
+.about{padding:120px 0;}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.about-img{aspect-ratio:3/4;background:var(--coal);border-radius:var(--r);position:relative;overflow:hidden;}
+.about-img-tag{position:absolute;bottom:16px;left:16px;font-size:.62rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:rgba(250,246,239,.5);}
+.about-body{padding-top:8px;}
+.about-body .label{margin-bottom:16px;display:block;}
+.about-body h2{margin-bottom:24px;}
+.about-body p{margin-bottom:16px;}
+.about-body .link-arrow{font-size:.82rem;font-weight:600;display:inline-flex;align-items:center;gap:6px;border-bottom:1px solid var(--coal);padding-bottom:2px;margin-top:12px;transition:opacity .2s;}
+.about-body .link-arrow:hover{opacity:.5;}
+.about-stats{display:flex;gap:40px;margin-top:40px;padding-top:32px;border-top:1px solid var(--line);}
+.about-stats .stat strong{display:block;font-family:'Cormorant Garant',serif;font-size:2rem;font-weight:600;line-height:1;}
+.about-stats .stat span{font-size:.72rem;color:var(--mist);margin-top:4px;display:block;}
 
-  .header-actions{display:flex; align-items:center; gap:18px;}
-  .lang-switch{
-    font-size:0.78rem; font-weight:600;
-    color:var(--ink-soft);
-    padding:6px 4px;
-    transition:color 0.2s ease;
-  }
-  .lang-switch:hover{color:var(--charcoal);}
-  .btn-b2b{
-    background:var(--charcoal);
-    color:var(--paper);
-    padding:11px 22px;
-    font-size:0.8rem;
-    font-weight:500;
-    border-radius:var(--radius);
-    transition:background 0.25s ease;
-  }
-  .btn-b2b:hover{background:var(--charcoal-soft);}
+/* ── CRAFT PROCESS ── */
+.process-section{background:var(--coal);color:var(--paper);padding:110px 0;}
+.process-section .label{color:var(--amber);}
+.process-section p{color:rgba(250,246,239,.55);}
+.process-head{max-width:560px;margin-bottom:64px;}
+.process-head h2{color:var(--paper);margin-bottom:16px;}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(250,246,239,.1);}
+.step{padding:36px 28px 36px 0;border-right:1px solid rgba(250,246,239,.1);}
+.step:last-child{border-right:none;}
+.step-num{font-family:'Cormorant Garant',serif;font-style:italic;font-size:2rem;font-weight:400;color:var(--amber);display:block;margin-bottom:20px;line-height:1;}
+.step h3{font-size:.9rem;font-weight:600;color:var(--paper);margin-bottom:8px;}
+.step p{font-size:.82rem;}
 
-  .menu-toggle{display:none; background:none; border:none; cursor:pointer; padding:4px;}
-  .menu-toggle svg{width:24px; height:24px;}
+/* ── JEWELRY PREVIEW ── */
+.jewelry-section{padding:120px 0;}
+.sec-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:52px;gap:20px;}
+.sec-header h2{max-width:500px;}
+.sec-header .see-all{font-size:.78rem;font-weight:600;color:var(--mist);border-bottom:1px solid var(--line);padding-bottom:2px;white-space:nowrap;transition:color .15s;}
+.sec-header .see-all:hover{color:var(--coal);}
+.jewelry-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;}
+.jewel-card{cursor:pointer;overflow:hidden;border-radius:var(--r);}
+.jewel-thumb{
+  aspect-ratio:1/1.1;background:var(--paper-dk);overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .35s ease;
+}
+.jewel-card:hover .jewel-thumb{transform:scale(1.03);}
+.jewel-thumb img{width:100%;height:100%;object-fit:cover;}
+.jewel-meta{padding:12px 4px 4px;}
+.jewel-meta .cat-label{font-size:.62rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);display:block;margin-bottom:3px;}
+.jewel-meta h3{font-family:'Cormorant Garant',serif;font-size:1.08rem;font-weight:500;}
 
-  /* ---------- HERO ---------- */
-  .hero{
-    padding:88px 0 0;
-    overflow:hidden;
-  }
-  .hero-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    align-items:center;
-    gap:60px;
-  }
-  .hero-eyebrow{
-    display:flex; align-items:center; gap:12px;
-    font-size:0.72rem; font-weight:600;
-    letter-spacing:0.14em; text-transform:uppercase;
-    color:var(--ink-soft);
-    margin-bottom:26px;
-  }
-  .hero-eyebrow::before{
-    content:'';
-    width:28px; height:1px;
-    background:var(--yellow-deep);
-  }
-  .hero h1{
-    font-family:'Fraunces',serif;
-    font-weight:500;
-    font-size:clamp(2.4rem, 4.2vw, 3.6rem);
-    line-height:1.06;
-    letter-spacing:-0.01em;
-    margin-bottom:28px;
-  }
-  .hero h1 em{
-    font-style:italic;
-    font-weight:400;
-    color:var(--yellow-deep);
-  }
-  .hero p{
-    font-size:1.05rem;
-    color:var(--ink-soft);
-    max-width:460px;
-    margin-bottom:38px;
-  }
-  .hero-cta{display:flex; align-items:center; gap:28px;}
-  .btn-primary{
-    background:var(--charcoal);
-    color:var(--paper);
-    padding:15px 30px;
-    font-size:0.88rem;
-    font-weight:500;
-    border-radius:var(--radius);
-    transition:background 0.25s ease, transform 0.25s ease;
-  }
-  .btn-primary:hover{background:var(--charcoal-soft); transform:translateY(-1px);}
-  .link-underline{
-    font-size:0.88rem; font-weight:500;
-    border-bottom:1px solid var(--charcoal);
-    padding-bottom:3px;
-    transition:opacity 0.25s ease;
-  }
-  .link-underline:hover{opacity:0.6;}
+/* ── B2B BLADE SECTION ── */
+.b2b-section{background:var(--amber);padding:100px 0;}
+.b2b-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:80px;align-items:center;}
+.b2b-section .label{color:rgba(30,28,26,.6);}
+.b2b-section h2{margin-bottom:20px;}
+.b2b-section p{color:rgba(30,28,26,.7);margin-bottom:24px;}
+.b2b-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px;}
+.pill{background:rgba(30,28,26,.1);padding:7px 14px;border-radius:100px;font-size:.76rem;font-weight:500;color:var(--coal);}
+/* B2B card */
+.b2b-card{background:var(--coal);color:var(--paper);padding:40px;border-radius:var(--r);}
+.b2b-card .card-label{font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:28px;}
+.b2b-stat{margin-bottom:6px;}
+.b2b-stat strong{font-family:'Cormorant Garant',serif;font-size:2.2rem;font-weight:600;display:block;line-height:1;}
+.b2b-stat span{font-size:.76rem;color:rgba(250,246,239,.5);}
+.b2b-divider{height:1px;background:rgba(250,246,239,.1);margin:20px 0;}
+.b2b-links{display:flex;flex-direction:column;gap:8px;margin-top:24px;}
+.b2b-links a{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;background:rgba(250,246,239,.06);border-radius:var(--r);font-size:.78rem;transition:background .15s;}
+.b2b-links a:hover{background:rgba(250,246,239,.12);}
+.b2b-links a .ext{font-size:.68rem;opacity:.45;}
 
-  .hero-image{
-    position:relative;
-    aspect-ratio:4/5;
-    background:linear-gradient(150deg, var(--paper-dark), #E4DCC8);
-    border-radius:var(--radius);
-    overflow:hidden;
-  }
-  .hero-image .ring-mark{
-    position:absolute; inset:0;
-    display:flex; align-items:center; justify-content:center;
-  }
-  .hero-image figcaption{
-    position:absolute; left:24px; bottom:24px;
-    background:rgba(250,247,241,0.92);
-    backdrop-filter:blur(4px);
-    padding:9px 16px;
-    font-size:0.74rem; font-weight:500;
-    border-radius:var(--radius);
-  }
+/* ── UPCOMING EXPO TEASER ── */
+.expo-teaser{padding:120px 0;border-bottom:1px solid var(--line);}
+.expo-teaser .sec-header{margin-bottom:48px;}
+.expo-preview{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);}
+.expo-item{background:var(--paper);padding:32px 28px;display:flex;flex-direction:column;gap:14px;transition:background .15s;}
+.expo-item:hover{background:var(--amber-pale);}
+.expo-date-block{display:flex;flex-direction:column;}
+.expo-date-block .month{font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);}
+.expo-date-block .day{font-family:'Cormorant Garant',serif;font-size:2.6rem;font-weight:500;line-height:1;color:var(--coal);}
+.expo-item h3{font-size:.9rem;font-weight:600;color:var(--coal);}
+.expo-item .loc{font-size:.78rem;color:var(--mist);}
+.expo-item .loc svg{display:inline;vertical-align:middle;margin-right:4px;}
+.expo-see-all{margin-top:36px;text-align:center;}
 
-  /* simple SVG ring composition standing in for product photography */
-  .ring-svg{width:64%; height:auto;}
+/* ── WHERE TO BUY ── */
+.store-teaser{background:var(--paper-dk);padding:110px 0;}
+.store-inner{display:flex;align-items:center;justify-content:space-between;gap:60px;}
+.store-inner .left{max-width:520px;}
+.store-inner .left h2{margin-bottom:16px;}
+.store-inner .left p{margin-bottom:28px;}
+.store-map-pill{display:flex;align-items:center;gap:12px;background:var(--paper);border:1px solid var(--line);padding:14px 20px;border-radius:100px;font-size:.8rem;font-weight:500;width:fit-content;transition:border-color .2s;}
+.store-map-pill:hover{border-color:var(--amber);}
+.store-map-pill .dot{width:8px;height:8px;border-radius:50%;background:var(--amber);}
 
-  .materials-strip{
-    border-top:1px solid var(--line);
-    border-bottom:1px solid var(--line);
-    margin-top:90px;
-  }
-  .materials-strip ul{
-    display:flex; list-style:none;
-    justify-content:space-between;
-    padding:22px 0;
-  }
-  .materials-strip li{
-    font-size:0.72rem; font-weight:600;
-    letter-spacing:0.1em; text-transform:uppercase;
-    color:var(--ink-soft);
-  }
+/* ── INFORMATIONS STRIP ── */
+.info-strip{padding:110px 0;}
+.info-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);margin-top:52px;}
+.info-card{background:var(--paper);padding:32px 26px;}
+.info-card .icon{width:36px;height:36px;border-radius:50%;background:var(--amber-pale);display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+.info-card .icon svg{width:17px;height:17px;stroke:var(--amber);}
+.info-card h3{font-size:.88rem;font-weight:600;margin-bottom:10px;}
+.info-card p{font-size:.82rem;}
+.info-card .info-link{font-size:.76rem;font-weight:600;color:var(--amber);margin-top:14px;display:inline-block;border-bottom:1px solid var(--amber);padding-bottom:1px;}
 
-  /* ---------- L'ARTISTE ---------- */
-  .artiste{padding:120px 0;}
-  .artiste-grid{
-    display:grid;
-    grid-template-columns:0.85fr 1.15fr;
-    gap:80px;
-    align-items:start;
-  }
-  .artiste-portrait{
-    aspect-ratio:3/4;
-    background:var(--charcoal);
-    border-radius:var(--radius);
-    position:relative;
-    overflow:hidden;
-  }
-  .artiste-portrait .tag{
-    position:absolute; top:20px; left:20px;
-    color:var(--paper);
-    font-size:0.7rem; font-weight:500;
-    letter-spacing:0.08em; text-transform:uppercase;
-    opacity:0.7;
-  }
-  .eyebrow{
-    font-size:0.72rem; font-weight:600;
-    letter-spacing:0.14em; text-transform:uppercase;
-    color:var(--yellow-deep);
-    margin-bottom:18px;
-    display:block;
-  }
-  .artiste h2{
-    font-family:'Fraunces',serif;
-    font-weight:500;
-    font-size:clamp(1.9rem, 2.8vw, 2.5rem);
-    line-height:1.15;
-    margin-bottom:28px;
-    max-width:560px;
-  }
-  .artiste p{
-    color:var(--ink-soft);
-    font-size:1rem;
-    max-width:560px;
-    margin-bottom:18px;
-  }
-  .artiste-signature{
-    display:flex; gap:40px;
-    margin-top:42px;
-    padding-top:32px;
-    border-top:1px solid var(--line);
-  }
-  .artiste-signature div strong{
-    display:block;
-    font-family:'Fraunces',serif;
-    font-size:1.5rem;
-    font-weight:500;
-  }
-  .artiste-signature div span{
-    font-size:0.76rem;
-    color:var(--ink-soft);
-  }
+/* ── FOOTER ── */
+footer{padding:64px 0 36px;border-top:3px solid var(--coal);}
+.foot-inner{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;margin-bottom:52px;}
+.foot-brand .flogo{font-family:'Cormorant Garant',serif;font-size:1.3rem;font-weight:600;display:block;margin-bottom:12px;}
+.foot-brand p{font-size:.82rem;max-width:240px;margin-bottom:20px;}
+.foot-social{display:flex;gap:10px;}
+.foot-social a{width:32px;height:32px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;transition:all .15s;}
+.foot-social a:hover{background:var(--amber);border-color:var(--amber);color:var(--paper);}
+.foot-col h4{font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--mist);margin-bottom:16px;}
+.foot-col ul{list-style:none;}
+.foot-col li{margin-bottom:10px;}
+.foot-col a{font-size:.83rem;transition:color .12s;}
+.foot-col a:hover{color:var(--amber);}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--line);font-size:.72rem;color:var(--mist);}
+.cmaq-badge{display:flex;align-items:center;gap:6px;font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;}
+.cmaq-badge::before{content:'✦';color:var(--amber);}
 
-  /* ---------- PROCESS / ATELIER ---------- */
-  .atelier{
-    background:var(--charcoal);
-    color:var(--paper);
-    padding:120px 0;
-  }
-  .atelier .eyebrow{color:var(--yellow);}
-  .atelier-head{
-    max-width:640px;
-    margin-bottom:70px;
-  }
-  .atelier-head h2{
-    font-family:'Fraunces',serif;
-    font-weight:500;
-    font-size:clamp(1.9rem, 2.8vw, 2.5rem);
-    line-height:1.18;
-  }
-  .process-grid{
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    gap:1px;
-    background:rgba(250,247,241,0.14);
-  }
-  .process-step{
-    background:var(--charcoal);
-    padding:36px 30px;
-  }
-  .process-step .num{
-    font-family:'Fraunces',serif;
-    font-style:italic;
-    font-size:1.1rem;
-    color:var(--yellow);
-    margin-bottom:22px;
-    display:block;
-  }
-  .process-step h3{
-    font-size:1.02rem;
-    font-weight:500;
-    margin-bottom:10px;
-  }
-  .process-step p{
-    font-size:0.86rem;
-    color:rgba(250,247,241,0.62);
-  }
+/* ── MOBILE DRAWER ── */
+.overlay{position:fixed;inset:0;background:rgba(30,28,26,.4);z-index:290;display:none;}
+.overlay.on{display:block;}
+.drawer{position:fixed;top:0;right:-100%;width:min(300px,88vw);height:100vh;background:var(--paper);z-index:300;overflow-y:auto;padding:24px;transition:right .25s ease;border-left:3px solid var(--amber);}
+.drawer.on{right:0;}
+.drawer-x{background:none;border:none;cursor:pointer;font-size:1.2rem;float:right;}
+.drawer-nav{clear:both;margin-top:28px;}
+.drawer-nav ul{list-style:none;}
+.drawer-nav > ul > li{border-bottom:1px solid var(--line);}
+.drawer-nav > ul > li > a,.drawer-nav > ul > li > button{display:block;width:100%;text-align:left;padding:13px 0;font-size:.88rem;font-weight:500;background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;}
+.drawer-sub{display:none;padding:0 0 8px 14px;}
+.drawer-sub.on{display:block;}
+.drawer-sub a{display:block;padding:7px 0;font-size:.82rem;color:var(--mist);}
+.drawer-ctas{margin-top:24px;display:flex;flex-direction:column;gap:10px;}
 
-  /* ---------- COLLECTIONS ---------- */
-  .collections{padding:120px 0;}
-  .section-head{
-    display:flex; justify-content:space-between;
-    align-items:flex-end;
-    margin-bottom:60px;
-    gap:40px;
-  }
-  .section-head h2{
-    font-family:'Fraunces',serif;
-    font-weight:500;
-    font-size:clamp(1.9rem, 2.8vw, 2.5rem);
-    line-height:1.15;
-    max-width:520px;
-  }
-  .section-head p{
-    color:var(--ink-soft);
-    max-width:300px;
-    font-size:0.92rem;
-  }
-  .collections-grid{
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    gap:24px;
-  }
-  .collection-card{
-    border-radius:var(--radius);
-    overflow:hidden;
-    background:var(--paper-dark);
-  }
-  .collection-card .thumb{
-    aspect-ratio:1/1.05;
-    position:relative;
-    display:flex; align-items:center; justify-content:center;
-  }
-  .collection-card .thumb.c1{background:linear-gradient(160deg,#C9C2B0,#9A9180);}
-  .collection-card .thumb.c2{background:linear-gradient(160deg,var(--yellow),var(--yellow-deep));}
-  .collection-card .thumb.c3{background:linear-gradient(160deg,#3B3935,#1E1D1B);}
-  .collection-card .thumb.c4{background:linear-gradient(160deg,#B08968,#8C6B4F);}
-  .collection-card .meta{
-    padding:18px 20px 22px;
-  }
-  .collection-card .meta .k{
-    font-size:0.68rem; font-weight:600;
-    letter-spacing:0.08em; text-transform:uppercase;
-    color:var(--ink-soft);
-    display:block; margin-bottom:6px;
-  }
-  .collection-card .meta h3{
-    font-family:'Fraunces',serif;
-    font-weight:500;
-    font-size:1.15rem;
-  }
-
-  /* ---------- B2B / BOUTIQUES ---------- */
-  .b2b{
-    background:var(--yellow);
-    padding:110px 0;
-  }
-  .b2b-grid{
-    display:grid;
-    grid-template-columns:1.1fr 0.9fr;
-    gap:80px;
-    align-items:center;
-  }
-  .b2b .eyebrow{color:var(--charcoal); opacity:0.6;}
-  .b2b h2{
-    font-family:'Fraunces',serif;
-    font-weight:500;
-    font-size:clamp(1.9rem, 2.8vw, 2.6rem);
-    line-height:1.14;
-    margin-bottom:26px;
-    max-width:540px;
-  }
-  .b2b p{
-    font-size:1rem;
-    color:rgba(42,42,40,0.72);
-    max-width:480px;
-    margin-bottom:38px;
-  }
-  .b2b-list{list-style:none; margin-bottom:40px;}
-  .b2b-list li{
-    display:flex; align-items:flex-start; gap:14px;
-    font-size:0.94rem;
-    padding:14px 0;
-    border-top:1px solid rgba(42,42,40,0.15);
-  }
-  .b2b-list li:last-child{border-bottom:1px solid rgba(42,42,40,0.15);}
-  .b2b-list li .mk{
-    font-family:'Fraunces',serif;
-    font-style:italic;
-    font-weight:500;
-    flex-shrink:0;
-  }
-  .btn-dark{
-    background:var(--charcoal);
-    color:var(--paper);
-    padding:16px 32px;
-    font-size:0.88rem;
-    font-weight:500;
-    border-radius:var(--radius);
-    display:inline-block;
-    transition:transform 0.25s ease;
-  }
-  .btn-dark:hover{transform:translateY(-1px);}
-
-  .b2b-card{
-    background:var(--charcoal);
-    color:var(--paper);
-    padding:44px;
-    border-radius:var(--radius);
-  }
-  .b2b-card .label{
-    font-size:0.72rem; font-weight:600;
-    letter-spacing:0.1em; text-transform:uppercase;
-    color:rgba(250,247,241,0.55);
-    margin-bottom:24px;
-    display:block;
-  }
-  .b2b-card .stat{
-    font-family:'Fraunces',serif;
-    font-size:2.6rem;
-    font-weight:500;
-    margin-bottom:6px;
-  }
-  .b2b-card .stat-label{
-    font-size:0.86rem;
-    color:rgba(250,247,241,0.62);
-    margin-bottom:30px;
-  }
-  .b2b-card .divider{
-    height:1px; background:rgba(250,247,241,0.16);
-    margin:28px 0;
-  }
-
-  /* ---------- FOOTER ---------- */
-  footer{
-    padding:70px 0 40px;
-    border-top:1px solid var(--line);
-  }
-  .footer-grid{
-    display:grid;
-    grid-template-columns:1.4fr 0.8fr 0.8fr 0.8fr;
-    gap:40px;
-    margin-bottom:60px;
-  }
-  .footer-brand .logo{margin-bottom:18px;}
-  .footer-brand p{
-    color:var(--ink-soft);
-    font-size:0.88rem;
-    max-width:280px;
-  }
-  .footer-col h4{
-    font-size:0.74rem; font-weight:600;
-    letter-spacing:0.08em; text-transform:uppercase;
-    color:var(--ink-soft);
-    margin-bottom:18px;
-  }
-  .footer-col ul{list-style:none;}
-  .footer-col li{margin-bottom:11px;}
-  .footer-col a{font-size:0.9rem;}
-  .footer-col a:hover{color:var(--yellow-deep);}
-  .footer-bottom{
-    display:flex; justify-content:space-between;
-    padding-top:28px;
-    border-top:1px solid var(--line);
-    font-size:0.78rem;
-    color:var(--ink-soft);
-  }
-
-  /* ---------- RESPONSIVE ---------- */
-  @media (max-width:980px){
-    .wrap, .header-inner{padding-left:24px; padding-right:24px;}
-    nav, .header-actions .btn-b2b{display:none;}
-    .menu-toggle{display:block;}
-    .hero-grid, .artiste-grid, .b2b-grid{
-      grid-template-columns:1fr;
-    }
-    .hero-grid{gap:50px;}
-    .hero{padding-top:60px;}
-    .artiste-grid{gap:44px;}
-    .artiste-portrait{max-width:340px;}
-    .process-grid{grid-template-columns:repeat(2, 1fr);}
-    .collections-grid{grid-template-columns:repeat(2, 1fr);}
-    .section-head{flex-direction:column; align-items:flex-start; gap:14px;}
-    .footer-grid{grid-template-columns:1fr 1fr; row-gap:36px;}
-    .materials-strip ul{flex-wrap:wrap; gap:14px 28px; justify-content:flex-start;}
-  }
-  @media (max-width:560px){
-    .process-grid, .collections-grid{grid-template-columns:1fr;}
-    .footer-grid{grid-template-columns:1fr;}
-    .hero-cta{flex-direction:column; align-items:flex-start; gap:18px;}
-    .footer-bottom{flex-direction:column; gap:8px;}
-  }
+/* ── RESPONSIVE ── */
+@media(max-width:1040px){.jewelry-grid{grid-template-columns:repeat(3,1fr);}.steps{grid-template-columns:1fr 1fr;}.info-cards{grid-template-columns:1fr 1fr;}}
+@media(max-width:860px){
+  .wrap,.hbar{padding-left:24px;padding-right:24px;}
+  .hnav,.hright .btn-coal,.hright .btn-amber{display:none;}
+  .hamburger{display:block;}
+  .hero-inner,.about-grid,.b2b-grid,.expo-grid{grid-template-columns:1fr;}
+  .hero{padding-top:60px;}
+  .hero-visual{max-height:380px;}
+  .sec-header{flex-direction:column;align-items:flex-start;gap:12px;}
+  .jewelry-grid{grid-template-columns:repeat(2,1fr);}
+  .expo-preview{grid-template-columns:1fr;}
+  .store-inner{flex-direction:column;gap:32px;}
+  .foot-inner{grid-template-columns:1fr 1fr;row-gap:32px;}
+  .b2b-grid{grid-template-columns:1fr;}
+}
+@media(max-width:560px){
+  .steps{grid-template-columns:1fr;}
+  .info-cards{grid-template-columns:1fr;}
+  .jewelry-grid{grid-template-columns:1fr 1fr;}
+  .foot-inner{grid-template-columns:1fr;}
+  .foot-bottom{flex-direction:column;gap:8px;text-align:center;}
+  .hero-actions{flex-direction:column;align-items:flex-start;}
+  .mat-ribbon ul{flex-wrap:wrap;gap:8px 18px;justify-content:flex-start;}
+  .about-stats{flex-wrap:wrap;gap:24px;}
+}
+@media(prefers-reduced-motion:reduce){*{transition-duration:.01ms !important;animation-duration:.01ms !important;}}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="header-inner">
-    <a href="#" class="logo">Christophe Poly<span>Bijoux d'art · fait main · Montréal</span></a>
-    <nav>
-      <ul>
-        <li><a href="#artiste">L'artiste</a></li>
-        <li><a href="#atelier">L'atelier</a></li>
-        <li><a href="#collections">Bijoux</a></li>
-        <li><a href="#boutiques">Boutiques</a></li>
-        <li><a href="#contact">Contact</a></li>
+<!-- OVERLAY + DRAWER -->
+<div class="overlay" id="ov" onclick="closeD()"></div>
+<div class="drawer" id="dr">
+  <button class="drawer-x" onclick="closeD()">✕</button>
+  <nav class="drawer-nav">
+    <ul>
+      <li><a href="a-propos.html">À propos</a></li>
+      <li>
+        <button onclick="toggleSub(this)">Bijoux ▾</button>
+        <div class="drawer-sub">
+          <a href="bijoux.html#bagues">Bagues</a>
+          <a href="bijoux.html#bracelets">Bracelets</a>
+          <a href="bijoux.html#boucles">Boucles d'oreilles</a>
+          <a href="bijoux.html#colliers">Colliers et sets</a>
+          <a href="bijoux.html#broches">Broches</a>
+        </div>
+      </li>
+      <li>
+        <button onclick="toggleSub(this)">Informations ▾</button>
+        <div class="drawer-sub">
+          <a href="informations.html#materiaux">Matériaux</a>
+          <a href="informations.html#finitions">Finitions</a>
+          <a href="informations.html#entretien">Entretien</a>
+          <a href="informations.html#allergies">Allergies</a>
+        </div>
+      </li>
+      <li><a href="expositions.html">Expositions</a></li>
+      <li><a href="ou-acheter.html">Où acheter</a></li>
+      <li><a href="a-propos.html#contact">Contact</a></li>
+    </ul>
+    <div class="drawer-ctas">
+      <a href="https://www.etsy.com/shop/ChristophePolyDesign" target="_blank" class="btn btn-amber">Boutique Etsy</a>
+      <a href="espace-commercant.html" class="btn btn-coal">Espace commerçant</a>
+    </div>
+  </nav>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="hbar">
+    <a href="index.html" class="hlogo">Christophe Poly<small>Bijoux artisanaux · Montréal</small></a>
+    <nav aria-label="Navigation principale">
+      <ul class="hnav">
+        <li><a href="a-propos.html">À propos</a></li>
+        <li>
+          <a href="bijoux.html">Bijoux <span class="caret">▾</span></a>
+          <ul class="sub">
+            <li><a href="bijoux.html#bagues">Bagues</a></li>
+            <li><a href="bijoux.html#bracelets">Bracelets</a></li>
+            <li><a href="bijoux.html#boucles">Boucles d'oreilles</a></li>
+            <li><a href="bijoux.html#colliers">Colliers et sets</a></li>
+            <li><a href="bijoux.html#broches">Broches</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="informations.html">Informations <span class="caret">▾</span></a>
+          <ul class="sub">
+            <li><a href="informations.html#materiaux">Matériaux</a></li>
+            <li><a href="informations.html#finitions">Finitions</a></li>
+            <li><a href="informations.html#entretien">Entretien</a></li>
+            <li><a href="informations.html#allergies">Allergies</a></li>
+          </ul>
+        </li>
+        <li><a href="expositions.html">Expositions</a></li>
+        <li><a href="ou-acheter.html">Où acheter</a></li>
+        <li><a href="a-propos.html#contact">Contact</a></li>
       </ul>
     </nav>
-    <div class="header-actions">
-      <a href="index-en.html" class="lang-switch">EN</a>
-      <a href="#boutiques" class="btn-b2b">Espace commerçant</a>
-      <button class="menu-toggle" aria-label="Menu">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+    <div class="hright">
+      <a href="https://www.etsy.com/shop/ChristophePolyDesign" target="_blank" class="btn btn-amber">Boutique Etsy</a>
+      <a href="espace-commercant.html" class="btn btn-coal">Espace commerçant</a>
+      <button class="hamburger" onclick="openD()" aria-label="Ouvrir le menu">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+          <line x1="2" y1="5" x2="18" y2="5"/><line x1="2" y1="10" x2="18" y2="10"/><line x1="2" y1="15" x2="18" y2="15"/>
+        </svg>
       </button>
     </div>
   </div>
 </header>
 
+<!-- HERO -->
 <section class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <div class="hero-eyebrow">Façonné à la main depuis Montréal</div>
-      <h1>Des bijoux pensés comme&nbsp;<em>une structure</em>,<br>portés comme une seconde peau.</h1>
-      <p>Chaque pièce naît d'une approche architecturale du volume et de la forme — aluminium, laiton, acrylique, cuir et caoutchouc, assemblés à la main dans l'atelier.</p>
-      <div class="hero-cta">
-        <a href="#collections" class="btn-primary">Voir les collections</a>
-        <a href="#artiste" class="link-underline">Rencontrer Christophe</a>
-      </div>
-    </div>
-    <figure class="hero-image">
-      <div class="ring-mark">
-        <svg class="ring-svg" viewBox="0 0 320 320" fill="none">
-          <rect x="60" y="40" width="200" height="200" rx="2" transform="rotate(45 160 160)" stroke="#2A2A28" stroke-width="2" opacity="0.85"/>
-          <circle cx="160" cy="160" r="58" fill="#F4C100"/>
-          <circle cx="160" cy="160" r="58" stroke="#2A2A28" stroke-width="2"/>
-          <rect x="118" y="220" width="84" height="58" rx="2" fill="#2A2A28" opacity="0.92"/>
-        </svg>
-      </div>
-      <figcaption>Collection « Fonderie » — pièce signature</figcaption>
-    </figure>
-  </div>
-
-  <div class="materials-strip">
-    <div class="wrap">
-      <ul>
-        <li>Aluminium</li>
-        <li>Laiton</li>
-        <li>Acrylique</li>
-        <li>Cuir</li>
-        <li>Caoutchouc</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section class="artiste" id="artiste">
-  <div class="wrap artiste-grid">
-    <div class="artiste-portrait">
-      <span class="tag">Christophe, en atelier</span>
-    </div>
-    <div>
-      <span class="eyebrow">L'artiste</span>
-      <h2>Une passion pour la beauté des objets du quotidien.</h2>
-      <p>Christophe Poly trouve son inspiration dans le volume, la structure et la forme — nourrie par ses voyages, la mode, le design et l'architecture. Au fil des années, il a développé un style et une technique qui n'appartiennent qu'à lui.</p>
-      <p>Chaque saison, les collections sont perfectionnées et de nouveaux designs viennent surprendre une clientèle fidèle. Aujourd'hui, ses bijoux se retrouvent dans de nombreuses galeries, boutiques et musées à travers l'Amérique du Nord.</p>
-      <div class="artiste-signature">
-        <div>
-          <strong>20+</strong>
-          <span>ans de métier</span>
-        </div>
-        <div>
-          <strong>NA</strong>
-          <span>galeries &amp; boutiques</span>
-        </div>
-        <div>
-          <strong>100%</strong>
-          <span>fait main, Montréal</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="atelier" id="atelier">
   <div class="wrap">
-    <div class="atelier-head">
-      <span class="eyebrow">L'atelier</span>
-      <h2>Une approche architecturale, de la matière brute à la pièce finie.</h2>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow">
+          <span class="label label-amber">Fait main à Montréal depuis 30 ans</span>
+        </div>
+        <h1 class="display display-lg">
+          Des bijoux pensés<br>comme <em>une structure</em>,<br>portés comme<br>une seconde peau.
+        </h1>
+        <p class="sub-copy">Aluminium, laiton, acrylique, cuir et caoutchouc — assemblés à la main dans l'atelier montréalais de Christophe Poly. Plus de 700 modèles, renouvelés chaque saison.</p>
+        <div class="hero-actions">
+          <a href="bijoux.html" class="btn btn-coal">Voir les bijoux</a>
+          <a href="a-propos.html" class="btn btn-ghost">Rencontrer Christophe</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-img-placeholder">
+          <img src="https://christophepoly.com/wp-content/uploads/2023/11/Poly_3844-e1700523121828.jpg"
+               alt="Bague Christophe Poly — collection signature"
+               style="width:100%;height:100%;object-fit:cover;"
+               onerror="this.style.display='none'">
+          <!-- Fallback SVG if image fails -->
+          <svg style="position:absolute;opacity:.15;" width="55%" viewBox="0 0 280 280" fill="none">
+            <rect x="50" y="30" width="180" height="180" rx="2" transform="rotate(45 140 140)" stroke="#1E1C1A" stroke-width="1.5"/>
+            <circle cx="140" cy="140" r="50" fill="#D4920A" fill-opacity=".6"/>
+            <circle cx="140" cy="140" r="50" stroke="#1E1C1A" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="hero-caption">Collection « Fonderie » — pièce signature</div>
+      </div>
     </div>
-    <div class="process-grid">
-      <div class="process-step">
-        <span class="num">i</span>
+  </div>
+  <div class="mat-ribbon">
+    <div class="wrap">
+      <ul><li>Aluminium</li><li>Laiton</li><li>Acrylique</li><li>Cuir</li><li>Caoutchouc</li><li>Membre CMAQ</li></ul>
+    </div>
+  </div>
+</section>
+
+<div class="blade"></div>
+
+<!-- ABOUT -->
+<section class="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="imgs/Christophe1.jpg" alt="Christophe Poly, en atelier" style="width:100%;height:100%;object-fit:cover;">
+        <span class="about-img-tag">Christophe, en atelier</span>
+      </div>
+      <div class="about-body">
+        <span class="label label-amber">L'artiste</span>
+        <h2 class="display display-md">Une passion pour la beauté des objets du quotidien.</h2>
+        <p>Christophe Poly trouve son inspiration dans le volume, la structure et la forme — nourrie par ses voyages, la mode, le design et l'architecture. Au fil des années, il a élaboré un style et une technique novatrice qui lui sont propres.</p>
+        <p>Ses bijoux ont été présentés dans de nombreuses galeries, boutiques et musées à travers l'Amérique du Nord. Membre actif du Conseil des métiers d'art du Québec (CMAQ).</p>
+        <a href="a-propos.html" class="link-arrow">Découvrir l'histoire →</a>
+        <div class="about-stats">
+          <div class="stat"><strong>30+</strong><span>ans de création</span></div>
+          <div class="stat"><strong>700+</strong><span>modèles actifs</span></div>
+          <div class="stat"><strong>100%</strong><span>fait main, Montréal</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section">
+  <div class="wrap">
+    <div class="process-head">
+      <span class="label" style="color:var(--amber);display:block;margin-bottom:14px;">L'atelier</span>
+      <h2 class="display display-md" style="color:var(--paper);margin-bottom:14px;">De la matière brute à la pièce finie.</h2>
+      <p>Chaque bijou résulte d'une construction tridimensionnelle complexe — fil, plaque et tube, découpés, limés et assemblés entièrement à la main.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">i</span>
         <h3>Le matériau</h3>
         <p>Aluminium, laiton, acrylique — choisis pour leur volume, leur poids et leur tenue dans le temps.</p>
       </div>
-      <div class="process-step">
-        <span class="num">ii</span>
+      <div class="step">
+        <span class="step-num">ii</span>
         <h3>La découpe</h3>
-        <p>Chaque plaque est découpée selon des proportions pensées comme on penserait une structure.</p>
+        <p>Chaque plaque et chaque fil est découpé selon des proportions architecturales précises.</p>
       </div>
-      <div class="process-step">
-        <span class="num">iii</span>
+      <div class="step">
+        <span class="step-num">iii</span>
         <h3>L'assemblage</h3>
-        <p>Les éléments sont limés, ajustés et combinés à la main jusqu'à l'équilibre juste.</p>
+        <p>Les éléments sont limés, ajustés et combinés à la main en une structure 3D complexe.</p>
       </div>
-      <div class="process-step">
-        <span class="num">iv</span>
+      <div class="step">
+        <span class="step-num">iv</span>
         <h3>La finition</h3>
-        <p>Chaque pièce est inspectée individuellement avant de quitter l'atelier.</p>
+        <p>Chaque pièce est inspectée, nettoyée et emballée individuellement avant de quitter l'atelier.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="collections" id="collections">
+<!-- JEWELRY PREVIEW -->
+<section class="jewelry-section">
   <div class="wrap">
-    <div class="section-head">
-      <h2>Quatre familles, une seule signature.</h2>
-      <p>Bagues, colliers, bracelets et boucles — toutes nées du même langage architectural.</p>
+    <div class="sec-header">
+      <h2 class="display display-md">Cinq familles, une seule signature.</h2>
+      <a href="bijoux.html" class="see-all">Voir toute la collection →</a>
     </div>
-    <div class="collections-grid">
-      <div class="collection-card">
-        <div class="thumb c1"></div>
-        <div class="meta">
-          <span class="k">Bagues</span>
-          <h3>Volume &amp; structure</h3>
+    <div class="jewelry-grid">
+      <a href="bijoux.html#bagues" class="jewel-card">
+        <div class="jewel-thumb">
+          <img src="https://christophepoly.com/wp-content/uploads/2023/11/Poly_3844-e1700523121828.jpg" alt="Bagues Christophe Poly" loading="lazy" onerror="this.parentElement.style.background='#D4920A22'">
         </div>
-      </div>
-      <div class="collection-card">
-        <div class="thumb c2"></div>
-        <div class="meta">
-          <span class="k">Colliers</span>
-          <h3>Fonderie</h3>
+        <div class="jewel-meta"><span class="cat-label">Collection</span><h3>Bagues</h3></div>
+      </a>
+      <a href="bijoux.html#bracelets" class="jewel-card">
+        <div class="jewel-thumb">
+          <img src="https://christophepoly.com/wp-content/uploads/2023/11/Poly_3356.jpg" alt="Bracelets Christophe Poly" loading="lazy" onerror="this.parentElement.style.background='#D4920A44'">
         </div>
-      </div>
-      <div class="collection-card">
-        <div class="thumb c3"></div>
-        <div class="meta">
-          <span class="k">Bracelets</span>
-          <h3>Architecture</h3>
+        <div class="jewel-meta"><span class="cat-label">Collection</span><h3>Bracelets</h3></div>
+      </a>
+      <a href="bijoux.html#boucles" class="jewel-card">
+        <div class="jewel-thumb">
+          <img src="https://christophepoly.com/wp-content/uploads/2023/11/0647_Poly_25331-e1701178144164.jpg" alt="Boucles d'oreilles Christophe Poly" loading="lazy" onerror="this.parentElement.style.background='#1E1C1A22'">
         </div>
-      </div>
-      <div class="collection-card">
-        <div class="thumb c4"></div>
-        <div class="meta">
-          <span class="k">Boucles d'oreilles</span>
-          <h3>Suspension</h3>
+        <div class="jewel-meta"><span class="cat-label">Collection</span><h3>Boucles d'oreilles</h3></div>
+      </a>
+      <a href="bijoux.html#colliers" class="jewel-card">
+        <div class="jewel-thumb">
+          <img src="https://christophepoly.com/wp-content/uploads/2023/11/0647_Poly_26086.jpg" alt="Colliers Christophe Poly" loading="lazy" onerror="this.parentElement.style.background='#D4920A33'">
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="b2b" id="boutiques">
-  <div class="wrap b2b-grid">
-    <div>
-      <span class="eyebrow">Pour les boutiques</span>
-      <h2>Donnez à vos clientes une histoire à raconter, pas juste un bijou à vendre.</h2>
-      <p>Christophe Poly équipe des galeries, boutiques et musées à travers l'Amérique du Nord depuis plus de 20 ans. Un partenariat pensé pour durer.</p>
-      <ul class="b2b-list">
-        <li><span class="mk">01</span> Collections renouvelées chaque saison</li>
-        <li><span class="mk">02</span> Pièces fabriquées à la main, au Québec</li>
-        <li><span class="mk">03</span> Accompagnement direct avec l'atelier</li>
-      </ul>
-      <a href="espace-commercant.html" class="btn-dark">Découvrir l'espace commerçant</a>
-    </div>
-    <div class="b2b-card">
-      <span class="label">Espace commerçant</span>
-      <div class="stat">20+</div>
-      <div class="stat-label">années de présence en boutique</div>
-      <div class="divider"></div>
-      <div class="stat">100%</div>
-      <div class="stat-label">fabrication artisanale, Montréal</div>
-      <div class="divider"></div>
-      <div class="stat">NA</div>
-      <div class="stat-label">galeries, boutiques &amp; musées partenaires</div>
+        <div class="jewel-meta"><span class="cat-label">Collection</span><h3>Colliers et sets</h3></div>
+      </a>
+      <a href="bijoux.html#broches" class="jewel-card">
+        <div class="jewel-thumb">
+          <img src="https://christophepoly.com/wp-content/uploads/2023/11/Poly_4512-e1701142620935.jpg" alt="Broches Christophe Poly" loading="lazy" onerror="this.parentElement.style.background='#F0E9DC'">
+        </div>
+        <div class="jewel-meta"><span class="cat-label">Collection</span><h3>Broches</h3></div>
+      </a>
     </div>
   </div>
 </section>
 
-<footer id="contact">
+<div class="blade"></div>
+
+<!-- B2B -->
+<section class="b2b-section">
   <div class="wrap">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="#" class="logo">Christophe Poly</a>
-        <p>Bijoux d'art fait main à Montréal, depuis plus de 20 ans.</p>
+    <div class="b2b-grid">
+      <div>
+        <span class="label" style="display:block;margin-bottom:16px;">Pour les commerçants</span>
+        <h2 class="display display-md" style="margin-bottom:16px;">Donnez à vos clientes une histoire à raconter.</h2>
+        <p>Christophe Poly équipe des galeries, boutiques et musées à travers l'Amérique du Nord depuis plus de 30 ans. Un partenariat simple, direct, avec l'atelier.</p>
+        <div class="b2b-pills">
+          <span class="pill">Collections saisonnières</span>
+          <span class="pill">100% fait main, Québec</span>
+          <span class="pill">Contact direct avec l'atelier</span>
+          <span class="pill">Disponible sur Faire &amp; Indième</span>
+        </div>
+        <a href="espace-commercant.html" class="btn btn-coal">Accéder à l'espace commerçant</a>
       </div>
-      <div class="footer-col">
-        <h4>Navigation</h4>
+      <div class="b2b-card">
+        <span class="card-label">Espace commerçant</span>
+        <div class="b2b-stat"><strong>30+</strong><span>ans de présence en boutique</span></div>
+        <div class="b2b-divider"></div>
+        <div class="b2b-stat"><strong>700+</strong><span>modèles disponibles</span></div>
+        <div class="b2b-divider"></div>
+        <div class="b2b-links">
+          <a href="https://www.faire.com/direct/christophepolycronodesign" target="_blank">
+            Commander sur Faire.com <span class="ext">↗</span>
+          </a>
+          <a href="https://www.indieme.com/Store/VendorID/27784" target="_blank">
+            Commander sur Indième <span class="ext">↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPO TEASER -->
+<section class="expo-teaser">
+  <div class="wrap">
+    <div class="sec-header">
+      <div>
+        <span class="label label-amber" style="display:block;margin-bottom:10px;">Prochaines dates</span>
+        <h2 class="display display-md">Expositions &amp; salons.</h2>
+      </div>
+      <a href="expositions.html" class="see-all">Voir toutes les dates →</a>
+    </div>
+    <div class="expo-preview">
+      <div class="expo-item">
+        <div class="expo-date-block">
+          <span class="month">Août 2026</span>
+          <span class="day">14–17</span>
+        </div>
+        <h3>Salon des métiers d'art de Québec</h3>
+        <p class="loc">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+          Québec (QC)
+        </p>
+      </div>
+      <div class="expo-item">
+        <div class="expo-date-block">
+          <span class="month">Octobre 2026</span>
+          <span class="day">3–5</span>
+        </div>
+        <h3>Créateurs en vedette — Montréal</h3>
+        <p class="loc">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+          Montréal (QC)
+        </p>
+      </div>
+      <div class="expo-item">
+        <div class="expo-date-block">
+          <span class="month">Novembre 2026</span>
+          <span class="day">27–30</span>
+        </div>
+        <h3>Salon des métiers d'art de Montréal</h3>
+        <p class="loc">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+          Place Bonaventure, Montréal (QC)
+        </p>
+      </div>
+    </div>
+    <div class="expo-see-all">
+      <a href="expositions.html" class="btn btn-ghost">Voir le calendrier complet</a>
+    </div>
+  </div>
+</section>
+
+<!-- STORE LOCATOR TEASER -->
+<section class="store-teaser">
+  <div class="wrap">
+    <div class="store-inner">
+      <div class="left">
+        <span class="label label-amber" style="display:block;margin-bottom:14px;">Où nous trouver</span>
+        <h2 class="display display-md">Galeries, boutiques et musées à travers l'Amérique du Nord.</h2>
+        <p>Trouvez un point de vente Christophe Poly près de chez vous. La disponibilité des produits peut varier selon la boutique.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;">
+          <a href="ou-acheter.html" class="btn btn-coal">Localisateur de boutiques</a>
+          <a href="https://www.etsy.com/shop/ChristophePolyDesign" target="_blank" class="btn btn-ghost">Boutique Etsy</a>
+        </div>
+      </div>
+      <a href="ou-acheter.html" class="store-map-pill">
+        <span class="dot"></span>
+        6044 St-Hubert, Montréal — Mar–Sam, 11h–17h
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- INFOS STRIP -->
+<section class="info-strip">
+  <div class="wrap">
+    <span class="label label-amber" style="display:block;margin-bottom:12px;">Informations</span>
+    <h2 class="display display-md">Matériaux, finitions &amp; entretien.</h2>
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M12 2L8 8H4l3 7-1 7 6-3 6 3-1-7 3-7h-4z" stroke="currentColor"/></svg>
+        </div>
+        <h3>Matériaux</h3>
+        <p>Aluminium, laiton, acrylique, cuir et caoutchouc. Fils et crochets hypoallergéniques disponibles.</p>
+        <a href="informations.html#materiaux" class="info-link">En savoir plus →</a>
+      </div>
+      <div class="info-card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="9" stroke="currentColor"/><path d="M9 12l2 2 4-4" stroke="currentColor"/></svg>
+        </div>
+        <h3>Finitions</h3>
+        <p>Antique, or, noir, argent brillant et or mat. Chaque finition est appliquée à la main avant l'emballage.</p>
+        <a href="informations.html#finitions" class="info-link">En savoir plus →</a>
+      </div>
+      <div class="info-card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M12 2C6 2 4 7 4 12c0 3 2 6 8 6s8-3 8-6c0-5-2-10-8-10z" stroke="currentColor"/><path d="M12 8v4l3 3" stroke="currentColor"/></svg>
+        </div>
+        <h3>Entretien</h3>
+        <p>Éviter l'eau et les produits chimiques. Un linge doux suffit. Retirer lors d'activités physiques intenses.</p>
+        <a href="informations.html#entretien" class="info-link">En savoir plus →</a>
+      </div>
+      <div class="info-card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z" stroke="currentColor"/></svg>
+        </div>
+        <h3>Allergies</h3>
+        <p>Pièces conçues pour minimiser les réactions cutanées. Fils et crochets sans nickel sur demande.</p>
+        <a href="informations.html#allergies" class="info-link">En savoir plus →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-inner">
+      <div class="foot-brand">
+        <a href="index.html" class="flogo">Christophe Poly</a>
+        <p>Bijoux d'art fait main à Montréal, depuis plus de 30 ans. Membre du CMAQ.</p>
+        <div class="foot-social">
+          <a href="https://www.facebook.com/christophepolydesign" target="_blank" aria-label="Facebook">f</a>
+          <a href="https://www.etsy.com/shop/ChristophePolyDesign" target="_blank" aria-label="Etsy">e</a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Explorer</h4>
         <ul>
-          <li><a href="#artiste">L'artiste</a></li>
-          <li><a href="#atelier">L'atelier</a></li>
-          <li><a href="#collections">Bijoux</a></li>
-          <li><a href="#boutiques">Boutiques</a></li>
+          <li><a href="a-propos.html">À propos</a></li>
+          <li><a href="bijoux.html">Bijoux</a></li>
+          <li><a href="expositions.html">Expositions</a></li>
+          <li><a href="informations.html">Informations</a></li>
+          <li><a href="ou-acheter.html">Où acheter</a></li>
         </ul>
       </div>
-      <div class="footer-col">
-        <h4>Boutique</h4>
+      <div class="foot-col">
+        <h4>Acheter</h4>
         <ul>
-          <li><a href="#">Boutique Etsy</a></li>
-          <li><a href="#boutiques">Espace commerçant</a></li>
-          <li><a href="#">Où acheter</a></li>
+          <li><a href="https://www.etsy.com/shop/ChristophePolyDesign" target="_blank">Boutique Etsy</a></li>
+          <li><a href="espace-commercant.html">Espace commerçant</a></li>
+          <li><a href="ou-acheter.html">Localisateur</a></li>
+          <li><a href="expositions.html">Salons artisanaux</a></li>
         </ul>
       </div>
-      <div class="footer-col">
+      <div class="foot-col">
         <h4>Contact</h4>
         <ul>
           <li><a href="mailto:info@christophepoly.com">info@christophepoly.com</a></li>
-          <li><a href="#">Instagram</a></li>
-          <li><a href="#">Montréal, QC</a></li>
+          <li><a href="tel:5142789246">514 278-9246</a></li>
+          <li><a href="ou-acheter.html">6044 St-Hubert, Mtl</a></li>
         </ul>
       </div>
     </div>
-    <div class="footer-bottom">
+    <div class="foot-bottom">
       <span>© 2026 Christophe Poly · Crono Design Inc.</span>
-      <span>Fait à la main au Québec</span>
+      <span class="cmaq-badge">Membre du Conseil des métiers d'art du Québec</span>
     </div>
   </div>
 </footer>
 
+<script>
+function openD(){document.getElementById('dr').classList.add('on');document.getElementById('ov').classList.add('on');document.body.style.overflow='hidden';}
+function closeD(){document.getElementById('dr').classList.remove('on');document.getElementById('ov').classList.remove('on');document.body.style.overflow='';}
+function toggleSub(b){const s=b.nextElementSibling;s.classList.toggle('on');b.textContent=b.textContent.includes('▾')?b.textContent.replace('▾','▸'):b.textContent.replace('▸','▾');}
+</script>
 </body>
 </html>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bijoux — Christophe Poly</title>
+<meta name="description" content="Découvrez la collection de bijoux artisanaux de Christophe Poly. Plus de 700 modèles de bagues, bracelets, boucles d'oreilles et colliers fabriqués à Montréal.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ── TOKENS ── */
+  :root {
+    --amber: #D4920A;
+    --amber-lt: #F5C842;
+    --amber-pale: #FDF3D8;
+    --coal: #1E1C1A;
+    --coal-soft: #45413C;
+    --paper: #FAF6EF;
+    --paper-dk: #F0E9DC;
+    --mist: rgba(30, 28, 26, 0.52);
+    --line: rgba(30, 28, 26, 0.10);
+    --r: 2px;
+    --max: 1200px;
+  }
+
+  /* ── RESET & BASE ── */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--paper);
+    color: var(--coal);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { text-decoration: none; color: inherit; }
+  img { max-width: 100%; display: block; }
+  
+  h1, h2, h3, h4, .display { font-family: 'Cormorant Garant', serif; font-weight: 500; }
+  em { font-style: italic; }
+
+  /* ── SHARED HEADER ── */
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--paper);
+    height: 66px;
+    border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px;
+  }
+  .h-left { display: flex; flex-direction: column; }
+  .h-left .logo { font-family: 'Cormorant Garant', serif; font-weight: 600; font-size: 1.3rem; line-height: 1; }
+  .h-left .subline { font-family: 'Inter', sans-serif; font-weight: 500; text-transform: uppercase; font-size: 0.58rem; color: var(--mist); margin-top: 4px; letter-spacing: 0.05em; }
+  
+  .h-center { display: flex; gap: 32px; }
+  .h-center a { font-size: 0.85rem; transition: color 0.2s; }
+  .h-center a:hover { color: var(--amber); }
+  .h-center a.active { color: var(--amber); font-weight: 600; }
+
+  .h-right { display: flex; align-items: center; gap: 16px; }
+  .h-right .lang { font-size: 0.8rem; font-weight: 600; margin-right: 8px; }
+  .btn-etsy, .btn-b2b {
+    padding: 8px 16px; font-size: 0.8rem; font-weight: 500;
+    border-radius: var(--r); transition: all 0.2s ease;
+  }
+  .btn-etsy { background: var(--amber); color: #fff; }
+  .btn-etsy:hover { background: var(--amber-lt); transform: translateY(-1px); }
+  .btn-b2b { background: var(--coal); color: var(--paper); }
+  .btn-b2b:hover { background: var(--coal-soft); transform: translateY(-1px); }
+  
+  .hamburger { display: none; background: none; border: none; font-size: 1.5rem; color: var(--coal); cursor: pointer; }
+
+  /* ── BREADCRUMB ── */
+  .breadcrumb {
+    max-width: var(--max); margin: 30px auto 0; padding: 0 40px;
+    font-size: 0.72rem; color: var(--mist);
+  }
+
+  /* ── PAGE HERO (Asymmetric) ── */
+  .hero {
+    max-width: var(--max); margin: 0 auto; padding: 80px 40px 100px;
+    display: flex; justify-content: space-between; align-items: flex-end; gap: 60px;
+  }
+  .hero-left h1 { font-size: 4rem; line-height: 0.9; }
+  .hero-left h1 em { font-size: 3.5rem; color: var(--mist); display: block; padding-left: 40px; }
+  .hero-right { max-width: 320px; padding-bottom: 10px; }
+  .hero-right p { font-size: 1rem; color: var(--coal-soft); }
+
+  /* ── STICKY TABS ── */
+  .tab-bar {
+    position: sticky; top: 66px; z-index: 90;
+    background: rgba(250, 246, 239, 0.95); /* paper with slight transparency */
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .tab-bar-inner {
+    max-width: var(--max); margin: 0 auto; padding: 0 40px;
+    display: flex; gap: 40px; overflow-x: auto; scrollbar-width: none;
+  }
+  .tab-bar-inner::-webkit-scrollbar { display: none; }
+  .tab-bar a {
+    padding: 20px 0; font-size: 0.9rem; font-weight: 500;
+    color: var(--mist); border-bottom: 2px solid transparent;
+    white-space: nowrap; transition: all 0.2s ease;
+  }
+  .tab-bar a:hover { color: var(--coal); }
+  .tab-bar a.active { color: var(--coal); border-bottom-color: var(--amber); }
+
+  /* ── GALLERY SECTIONS ── */
+  .gallery-section {
+    max-width: var(--max); margin: 0 auto; padding: 100px 40px;
+    scroll-margin-top: 130px; /* Offset for sticky header + tabs */
+  }
+  .blade { width: 100%; height: 3px; background: var(--amber); margin-bottom: 60px; }
+  .eyebrow { 
+    display: block; font-size: 0.75rem; font-weight: 600; 
+    text-transform: uppercase; color: var(--amber); letter-spacing: 0.1em; 
+    margin-bottom: 40px; 
+  }
+
+  /* Grid System */
+  .grid { display: grid; gap: 20px; }
+  .photo-card {
+    position: relative; overflow: hidden; border-radius: var(--r);
+    background: var(--paper-dk); border: 1px solid var(--line);
+    aspect-ratio: 4/5;
+  }
+  .photo-card img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .photo-card:hover img { transform: scale(1.03); }
+  
+  .card-overlay {
+    position: absolute; inset: 0; background: rgba(30,28,26,0.2);
+    display: flex; align-items: flex-end; padding: 20px;
+    opacity: 0; transition: opacity 0.3s ease;
+  }
+  .photo-card:hover .card-overlay { opacity: 1; }
+  .card-overlay span {
+    font-family: 'Cormorant Garant', serif; font-style: italic; font-size: 1.5rem;
+    color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  }
+
+  /* Asymmetric Variations */
+  #bagues .grid { grid-template-columns: repeat(3, 1fr); }
+  #bagues .grid .photo-card:first-child { grid-row: span 2; aspect-ratio: auto; }
+  
+  #bracelets .grid { grid-template-columns: repeat(4, 1fr); }
+  
+  #boucles .grid { grid-template-columns: repeat(3, 1fr); }
+  #boucles .grid .photo-card:last-child { grid-column: span 2; aspect-ratio: 2/1.2; }
+  
+  #colliers .grid { grid-template-columns: repeat(2, 1fr); }
+  #colliers .grid .photo-card { aspect-ratio: 1/1; }
+  
+  #broches .grid { grid-template-columns: repeat(4, 1fr); }
+
+  /* ── SHARED FOOTER ── */
+  footer {
+    border-top: 3px solid var(--coal);
+    background: var(--paper); padding: 80px 40px 30px; margin-top: 60px;
+  }
+  .footer-grid {
+    max-width: var(--max); margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px;
+  }
+  .f-brand .logo { font-family: 'Cormorant Garant', serif; font-size: 1.8rem; font-weight: 500; display: block; margin-bottom: 16px; }
+  .f-brand p { color: var(--mist); font-size: 0.9rem; max-width: 280px; margin-bottom: 24px; }
+  
+  .f-col h4 { font-family: 'Inter', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mist); margin-bottom: 20px; }
+  .f-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .f-col a { font-size: 0.9rem; color: var(--coal); transition: color 0.2s; }
+  .f-col a:hover { color: var(--amber); }
+
+  .footer-bottom {
+    max-width: var(--max); margin: 80px auto 0; padding-top: 24px;
+    border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.75rem; color: var(--mist);
+  }
+
+  /* ── RESPONSIVE (<860px) ── */
+  @media (max-width: 860px) {
+    .h-center, .h-right .lang, .h-right .btn-etsy, .h-right .btn-b2b { display: none; }
+    .hamburger { display: block; }
+    
+    .hero { flex-direction: column; align-items: flex-start; gap: 30px; padding: 60px 20px; }
+    .hero-left h1 { font-size: 3rem; }
+    .hero-left h1 em { padding-left: 20px; font-size: 2.5rem; }
+    .breadcrumb { padding: 0 20px; }
+    
+    .tab-bar-inner { padding: 0 20px; gap: 24px; }
+    
+    .gallery-section { padding: 60px 20px; }
+    .grid, #bagues .grid, #bracelets .grid, #boucles .grid, #colliers .grid, #broches .grid { grid-template-columns: 1fr; }
+    #bagues .grid .photo-card:first-child { grid-row: auto; aspect-ratio: 4/5; }
+    #boucles .grid .photo-card:last-child { grid-column: auto; aspect-ratio: 4/5; }
+    
+    .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+    .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="h-left">
+      <a href="index.html" class="logo">Christophe Poly</a>
+      <span class="subline">Bijoux artisanaux · Montréal</span>
+    </div>
+    <nav class="h-center">
+      <a href="a-propos.html">À propos</a>
+      <a href="bijoux.html" class="active">Bijoux</a>
+      <a href="informations.html">Informations</a>
+      <a href="expositions.html">Expositions</a>
+      <a href="ou-acheter.html">Où acheter</a>
+      <a href="a-propos.html#contact">Contact</a>
+    </nav>
+    <div class="h-right">
+      <a href="https://www.etsy.com/shop/ChristophePolyDesign" target="_blank" class="btn-etsy">Boutique Etsy</a>
+      <a href="espace-commercant.html" class="btn-b2b">Espace commerçant</a>
+      <button class="hamburger" aria-label="Menu">☰</button>
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    Accueil › Bijoux
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-left">
+      <h1>Bijoux <br><em>la collection</em></h1>
+    </div>
+    <div class="hero-right">
+      <p>Plus de 700 modèles, renouvelés chaque saison. Fabriqués à la main dans l'atelier montréalais.</p>
+    </div>
+  </section>
+
+  <!-- Sticky Tabs -->
+  <div class="tab-bar">
+    <div class="tab-bar-inner">
+      <a href="#bagues" class="tab-link active">Bagues</a>
+      <a href="#bracelets" class="tab-link">Bracelets</a>
+      <a href="#boucles" class="tab-link">Boucles d'oreilles</a>
+      <a href="#colliers" class="tab-link">Colliers et sets</a>
+      <a href="#broches" class="tab-link">Broches</a>
+    </div>
+  </div>
+
+  <!-- Bagues -->
+  <section id="bagues" class="gallery-section scroll-spy">
+    <span class="eyebrow">Bagues</span>
+    <div class="grid">
+      <!-- Image 1 spans 2 rows -->
+      <a href="#" class="photo-card" aria-label="Bague modèle 1">
+        <img src="https://christophepoly.com/wp-content/uploads/2023/11/Poly_3844-e1700523121828.jpg" loading="lazy" alt="Bague Christophe Poly" onerror="this.onerror=null; this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='; this.parentElement.style.background='var(--paper-dk)';">
+        <div class="card-overlay"><span>Modèle architectural</span></div>
+      </a>
+      <a href="#" class="photo-card" aria-label="Bague modèle 2">
+        <img src="https://christophepoly.com/wp-content/uploads/2023/11/Poly_3844-e1700523121828.jpg" loading="lazy" alt="Bague Christophe Poly" style="object-position: top;" onerror="this.onerror=null; this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='; this.parentElement.style.background='var(--paper-dk)';">
+        <div class="card-overlay"><span>Finition or mat</span></div>
+      </a>
+      <a href="#" class="photo-card" aria-label="Bague modèle 3">
+        <img src="https://christophepoly.com/wp-content/uploads/2023/11/Poly_3844-e1700523121828.jpg" loading="lazy" alt="Bague Christophe Poly" style="object-position: bottom;" onerror="this.onerror=null; this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='; this.parentElement.style.background='var(--paper-dk)';">
+        <div class="card-overlay"><span>Laiton et acrylique</span></div>
+      </a>
+      <a href="#" class="photo-card" aria-label="Bague modèle 4">
+        <img src="https://christophepoly.com/wp-content/uploads/2023/11/Poly_3844-e1700523121828.jpg" loading="lazy" alt="Bague Christophe Poly" style="object-position: left;" onerror="this.onerror=null; this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='; this.parentElement.style.background='var(--paper-dk)';">
+        <div class="card-overlay"><span>Modèle double</span></div>
+      </a>
+      <a href="#" class="photo-card" aria-label="Bague modèle 5">
+        <img src="https://christophepoly.com/wp-content/uploads/2023/11/Poly_3844-e1700523121828.jpg" loading="lazy" alt="Bague Christophe Poly" style="object-position: right;" onerror="this.onerror=null; this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='; this.parentElement.style.background='var(--paper-dk)';">
+        <div class="card-overlay"><span>Finition antique</span></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Bracelets -->
+  <section id="bracelets" class="gallery-section scroll-spy">
+    <div class="blade"></div>
+    <span class="eyebrow">Bracelets</span>
+    <div class="grid">
+      <a href="#" class="photo-card" aria-label="Bracelet modèle 1">
+        <img src="https://christophepoly.com/wp-content/uploads/2023/11/Poly_3356.jpg" loading="lazy" alt="Bracelet Christophe Poly" onerror="this.onerror=null; this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='; this.parentElement.style.background='var(--paper-dk)';">
+        <div class="card-overlay"><span>Lignes pures</span></div>
+      </a>
+      <a href="#" class="photo-card" aria-label="Bracelet modèle 2">
+        <img src="https://christophepoly.com/wp-content/uploads/2023/11/Poly_3356.jpg" loading="lazy" alt="Bracelet Christophe Poly" style="object-position: top;" onerror="this.onerror=null; this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='; this.parentElement.style.background='var(--paper-dk)';">
+        <div class="card-overlay"><span>Structure souple</span></div>
+      </a>
+      <a href="#" class="photo-card" aria-label="Bracelet modèle 3">
+        <img src="https://christophepoly.com/wp-content/uploads/2023/11/Poly_3356.jpg" loading="lazy" alt="Bracelet Christophe Poly" style="object-position: bottom;" onerror="this.onerror=null; this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='; this.parentElement.style.background='var(--paper-dk)';">
+        <div class="card-overlay"><span>Aluminium texturé</span></div>
+      </a>
+      <a href="#" class="photo-card" aria-label="Bracelet modèle 4">
+        <img src="https://christophepoly.com/wp-content/uploads/2023/11/Poly_3356.jpg" loading="lazy" alt="Bracelet Christophe Poly" style="object-position: left;" onerror="this.onerror=null; this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='; this.parentElement.style.background='var(--paper-dk)';">
+        <div class="card-overlay"><span>Contraste noir</span></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Boucles d'oreilles -->
+  <section id="boucles" class="gallery-section scroll-spy">
+    <div class="blade"></div>
+    <span class="eyebrow">Boucles d'oreilles</span>
+    <div class="grid">
+      <a href="#" class="photo-card" aria-label="Boucles modèle 1">
+        <img src="https://christophepoly.com/wp-content/uploads/2023/11/0647_Poly_25331-e1701178144164.jpg" loading="lazy" alt="Boucles d'oreilles Christophe Poly" onerror="this.onerror=null; this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='; this.parentElement.style.background='var(--paper-dk)';">
+        <div class="card-overlay"><span>Goutte géométrique</span></div>
+      </a>
+      <a href="#" class="photo-card" aria-label="Boucles modèle 2">
+        <img src="https://christophepoly.com/wp-content/uploads/2023/11/0647_Poly_25331-e1701178144164.jpg" loading="lazy" alt="Boucles d'oreilles Christophe Poly" style="object-position: bottom;" onerror="this.onerror=null; this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='; this.parentElement.style.background='var(--paper-dk)';">
+        <div class="card-overlay"><span>Crochets hypoallergéniques</span></div>
+      </a>
+      <!-- This item spans 2 columns -->
+      <a href="#" class="photo-card" aria-label="Boucles modèle 3">
+        <img src="https://christophepoly.com/wp-content/uploads/2023/11/0647_Poly_25331-e1701178144164.jpg" loading="lazy" alt="Boucles d'oreilles Christophe Poly" style="object-position: center;" onerror="this.onerror=null; this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='; this.parentElement.style.background='var(--paper-dk)';">
+        <div class="card-overlay"><span>Collection signature</span></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Colliers et sets -->
+  <section id="colliers" class="gallery-section scroll-spy">
+    <div class="blade"></div>
+    <span class="eyebrow">Colliers et sets</span>
+    <div class="grid">
+      <a href="#" class="photo-card" aria-label="Collier modèle 1">
+        <img src="https://christophepoly.com/wp-content/uploads/2023/11/0647_Poly_26086.jpg" loading="lazy" alt="Collier Christophe Poly" onerror="this.onerror=null; this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='; this.parentElement.style.background='var(--paper-dk)';">
+        <div class="card-overlay"><span>Pendentif asymétrique</span></div>
+      </a>
+      <a href="#" class="photo-card" aria-label="Collier modèle 2">
+        <img src="https://christophepoly.com/wp-content/uploads/2023/11/0647_Poly_26086.jpg" loading="lazy" alt="Collier Christophe Poly" style="object-position: top;" onerror="this.onerror=null; this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='; this.parentElement.style.background='var(--paper-dk)';">
+        <div class="card-overlay"><span>Cordon caoutchouc</span></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Broches -->
+  <section id="broches" class="gallery-section scroll-spy">
+    <div class="blade"></div>
+    <span class="eyebrow">Broches</span>
+    <div class="grid">
+      <a href="#" class="photo-card" aria-label="Broche modèle 1">
+        <img src="https://christophepoly.com/wp-content/uploads/2023/11/Poly_4512-e1701142620935.jpg" loading="lazy" alt="Broche Christophe Poly" onerror="this.onerror=null; this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='; this.parentElement.style.background='var(--paper-dk)';">
+        <div class="card-overlay"><span>Épingle sculpturale</span></div>
+      </a>
+      <a href="#" class="photo-card" aria-label="Broche modèle 2">
+        <img src="https://christophepoly.com/wp-content/uploads/2023/11/Poly_4512-e1701142620935.jpg" loading="lazy" alt="Broche Christophe Poly" style="object-position: right;" onerror="this.onerror=null; this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='; this.parentElement.style.background='var(--paper-dk)';">
+        <div class="card-overlay"><span>Volume 3D</span></div>
+      </a>
+      <a href="#" class="photo-card" aria-label="Broche modèle 3">
+        <img src="https://christophepoly.com/wp-content/uploads/2023/11/Poly_4512-e1701142620935.jpg" loading="lazy" alt="Broche Christophe Poly" style="object-position: left;" onerror="this.onerror=null; this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='; this.parentElement.style.background='var(--paper-dk)';">
+        <div class="card-overlay"><span>Acrylique rouge</span></div>
+      </a>
+      <a href="#" class="photo-card" aria-label="Broche modèle 4">
+        <img src="https://christophepoly.com/wp-content/uploads/2023/11/Poly_4512-e1701142620935.jpg" loading="lazy" alt="Broche Christophe Poly" style="object-position: bottom;" onerror="this.onerror=null; this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='; this.parentElement.style.background='var(--paper-dk)';">
+        <div class="card-overlay"><span>Composition mixte</span></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <div class="footer-grid">
+      <div class="f-brand">
+        <span class="logo">Christophe Poly</span>
+        <p>Bijoux d'art fait main à Montréal, depuis plus de 30 ans. Membre du CMAQ.</p>
+        <div style="display:flex; gap:16px;">
+          <a href="#" aria-label="Facebook"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+          <a href="https://www.etsy.com/shop/ChristophePolyDesign" target="_blank" aria-label="Etsy"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg></a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h4>Explorer</h4>
+        <ul>
+          <li><a href="a-propos.html">À propos</a></li>
+          <li><a href="bijoux.html">Bijoux</a></li>
+          <li><a href="expositions.html">Expositions</a></li>
+          <li><a href="informations.html">Informations</a></li>
+          <li><a href="ou-acheter.html">Où acheter</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Acheter</h4>
+        <ul>
+          <li><a href="https://www.etsy.com/shop/ChristophePolyDesign" target="_blank">Boutique Etsy</a></li>
+          <li><a href="espace-commercant.html">Espace commerçant</a></li>
+          <li><a href="ou-acheter.html">Localisateur</a></li>
+          <li><a href="expositions.html">Salons</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:info@christophepoly.com">info@christophepoly.com</a></li>
+          <li><a href="tel:5142789246">514 278-9246</a></li>
+          <li><a href="ou-acheter.html">6044 St-Hubert Mtl</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Christophe Poly · Crono Design Inc.</span>
+      <span>Membre du Conseil des métiers d'art du Québec</span>
+    </div>
+  </footer>
+
+  <script>
+    // ScrollSpy for Sticky Tabs
+    document.addEventListener("DOMContentLoaded", function() {
+      const sections = document.querySelectorAll(".scroll-spy");
+      const tabLinks = document.querySelectorAll(".tab-link");
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute("id");
+            tabLinks.forEach(link => {
+              link.classList.remove("active");
+              if (link.getAttribute("href") === "#" + id) {
+                link.classList.add("active");
+                // Scroll tab bar horizontally to keep active item in view on smaller screens
+                link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+              }
+            });
+          }
+        });
+      }, { rootMargin: "-140px 0px -60% 0px" });
+
+      sections.forEach(sec => observer.observe(sec));
+    });
+  </script>
+</body>
+</html>
